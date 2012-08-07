@@ -1,0 +1,18 @@
+body {
+  position: relative;
+}
+
+body > * {
+  display: none;
+  position: absolute;
+}
+
+.egg-0 {
+  top: 30px;
+  left: 30px;
+}
+
+.egg-1 {
+  top: 40px;
+  left: 50px;
+}

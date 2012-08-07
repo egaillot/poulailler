@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+  <head>
+    <script src="../lib/jquery-1.7.2.js"></script>
+    <script src="../lib/coffee-script.js"></script>
+    <script type="text/coffeescript" src="../src/eggView.coffee"></script>
+  </head>
+  <body>
+    <div class="egg-0" style="display: none;">First</div>
+    <div class="egg-1" style="display: none;">Second</div>
+
+    <script type="text/coffeescript">
+      view = new EggView
+      view.display 1
+    </script>
+  </body>
+</html>
