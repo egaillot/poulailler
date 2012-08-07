@@ -6,17 +6,23 @@
     <script src="lib/coffee-script.js"></script>
     <script type="text/coffeescript" src="src/eggView.coffee"></script>
     <script type="text/coffeescript" src="src/egg.coffee"></script>
+    <script type="text/coffeescript" src="src/coop.coffee"></script>
   </head>
   <body>
     <div class="egg-0">O</div>
-    <div class="egg-1">1</div>
+    <div class="egg-1">O</div>
+    <div class="egg-2">O</div>
+    <div class="egg-3">O</div>
+    <div class="egg-4">O</div>
 
     <script type="text/coffeescript">
       eggView = new EggView
-      egg = new Egg eggView
-      egg.show()
-      egg.move()
-      egg.show()
+      coop = new Coop eggView
+      coop.throwNewEgg()
+      setTimeout (-> coop.tick()), 500
+      setTimeout (-> coop.tick()), 1000
+      setTimeout (-> coop.tick()), 1500
+      setTimeout (-> coop.tick()), 2000
     </script>
   </body>
 </html>

@@ -4,3 +4,7 @@ class @Coop
 
   throwNewEgg: ->
     @eggsPresent.push(new Egg(@eggView))
+
+  tick: ->
+    for egg in @eggsPresent
+      egg.move()
