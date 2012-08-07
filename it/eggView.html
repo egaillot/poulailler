@@ -11,7 +11,11 @@
 
     <script type="text/coffeescript">
       view = new EggView
-      view.display 1
+      view.display 0
+      setTimeout ->
+        view.erase 0
+        view.display 1
+      , 1000
     </script>
   </body>
 </html>

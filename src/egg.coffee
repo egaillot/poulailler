@@ -8,3 +8,6 @@ class @Egg
 
   show: ->
     @view.display @position
+
+  hide: ->
+    @view.erase @position
