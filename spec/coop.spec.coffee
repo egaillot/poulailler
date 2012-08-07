@@ -16,3 +16,11 @@ describe 'The Chicken Coop', ->
     coop.throwNewEgg()
     coop.tick()
     expect(coop.eggsPresent[0].position).toEqual 1
+
+  it 'throws new egg when current egg at end of line', ->
+    coop = new Coop @eggView
+    coop.throwNewEgg()
+    for i in [0..4]
+      coop.tick()
+    expect(coop.eggsPresent.length).toEqual 1
+    expect(coop.eggsPresent[0].position).toEqual 0

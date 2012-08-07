@@ -20,3 +20,10 @@ describe "An egg", ->
     egg.move()
     expect(@eggView.erase).toHaveBeenCalledWith 0
     expect(@eggView.display).toHaveBeenCalledWith 1
+
+  it "knows when it is about to fall", ->
+    egg = new Egg @eggView
+    egg.position = 3
+    expect(egg.aboutToFall()).toBeFalsy()
+    egg.position = 4
+    expect(egg.aboutToFall()).toBeTruthy()

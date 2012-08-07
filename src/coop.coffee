@@ -2,9 +2,18 @@ class @Coop
   constructor: (@eggView)->
     @eggsPresent = []
 
+  init: ->
+    @throwNewEgg()
+    setInterval (=> @tick()), 500
+
   throwNewEgg: ->
-    @eggsPresent.push(new Egg(@eggView))
+    @eggsPresent.unshift(new Egg(@eggView))
 
   tick: ->
-    for egg in @eggsPresent
+    egg = @eggsPresent.pop()
+    if egg.aboutToFall()
+      egg.hide()
+      @throwNewEgg()
+    else
       egg.move()
+      @eggsPresent.unshift(egg)

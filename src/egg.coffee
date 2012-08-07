@@ -1,3 +1,5 @@
+EGG_ABOUT_TO_FALL_POSITION = 4
+
 class @Egg
 
   constructor: (@view)->
@@ -14,3 +16,6 @@ class @Egg
 
   hide: ->
     @view.erase @position
+
+  aboutToFall: ->
+    @position == EGG_ABOUT_TO_FALL_POSITION

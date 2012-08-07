@@ -18,11 +18,7 @@
     <script type="text/coffeescript">
       eggView = new EggView
       coop = new Coop eggView
-      coop.throwNewEgg()
-      setTimeout (-> coop.tick()), 500
-      setTimeout (-> coop.tick()), 1000
-      setTimeout (-> coop.tick()), 1500
-      setTimeout (-> coop.tick()), 2000
+      coop.init()
     </script>
   </body>
 </html>
