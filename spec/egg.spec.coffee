@@ -1,24 +1,22 @@
 describe "An egg", ->
 
+  beforeEach ->
+    @eggView =
+      display: jasmine.createSpy('display')
+      erase: jasmine.createSpy('erase')
+
+  it "can display itself", ->
+    egg = new Egg @eggView
+    expect(@eggView.display).toHaveBeenCalledWith 0
+
   it "can move", ->
-    egg = new Egg
+    egg = new Egg @eggView
     expect(egg.position).toEqual 0
     egg.move()
     expect(egg.position).toEqual 1
 
-  it "can display itself", ->
-    eggView =
-      display: jasmine.createSpy('display')
-
-    egg = new Egg eggView
-    egg.show()
-    expect(eggView.display).toHaveBeenCalledWith 0
-
   it "can hide itself", ->
-    eggView =
-      erase: jasmine.createSpy('erase')
-
-    egg = new Egg eggView
+    egg = new Egg @eggView
     egg.move()
-    egg.hide()
-    expect(eggView.erase).toHaveBeenCalledWith 1
+    expect(@eggView.erase).toHaveBeenCalledWith 0
+    expect(@eggView.display).toHaveBeenCalledWith 1
