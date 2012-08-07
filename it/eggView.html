@@ -6,15 +6,15 @@
     <script type="text/coffeescript" src="../src/eggView.coffee"></script>
   </head>
   <body>
-    <div class="egg-0" style="display: none;">First</div>
-    <div class="egg-1" style="display: none;">Second</div>
+    <div class="line-0 egg-0" style="display: none;">First</div>
+    <div class="line-0 egg-1" style="display: none;">Second</div>
 
     <script type="text/coffeescript">
       view = new EggView
-      view.display 0
+      view.display 0, 0
       setTimeout ->
-        view.erase 0
-        view.display 1
+        view.erase 0, 0
+        view.display 0, 1
       , 1000
     </script>
   </body>

@@ -2,7 +2,7 @@ EGG_ABOUT_TO_FALL_POSITION = 4
 
 class @Egg
 
-  constructor: (@view)->
+  constructor: (@line, @view)->
     @position = 0
     @show()
 
@@ -12,10 +12,10 @@ class @Egg
     @show()
 
   show: ->
-    @view.display @position
+    @view.display @line, @position
 
   hide: ->
-    @view.erase @position
+    @view.erase @line, @position
 
   aboutToFall: ->
     @position == EGG_ABOUT_TO_FALL_POSITION

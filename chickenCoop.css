@@ -7,27 +7,102 @@ body > * {
   position: absolute;
 }
 
-.egg-0 {
+.line-0.egg-0 {
   top: 30px;
   left: 30px;
 }
 
-.egg-1 {
+.line-0.egg-1 {
   top: 40px;
   left: 50px;
 }
 
-.egg-2 {
+.line-0.egg-2 {
   top: 50px;
   left: 70px;
 }
 
-.egg-3 {
+.line-0.egg-3 {
   top: 60px;
   left: 90px;
 }
 
-.egg-4 {
+.line-0.egg-4 {
   top: 70px;
   left: 110px;
+}
+
+.line-1.egg-0 {
+  top: 30px;
+  left: 270px;
+}
+
+.line-1.egg-1 {
+  top: 40px;
+  left: 250px;
+}
+
+.line-1.egg-2 {
+  top: 50px;
+  left: 230px;
+}
+
+.line-1.egg-3 {
+  top: 60px;
+  left: 210px;
+}
+
+.line-1.egg-4 {
+  top: 70px;
+  left: 190px;
+}
+
+.line-2.egg-0 {
+  top: 90px;
+  left: 30px;
+}
+
+.line-2.egg-1 {
+  top: 100px;
+  left: 50px;
+}
+
+.line-2.egg-2 {
+  top: 110px;
+  left: 70px;
+}
+
+.line-2.egg-3 {
+  top: 120px;
+  left: 90px;
+}
+
+.line-2.egg-4 {
+  top: 130px;
+  left: 110px;
+}
+
+.line-3.egg-0 {
+  top: 90px;
+  left: 270px;
+}
+
+.line-3.egg-1 {
+  top: 100px;
+  left: 250px;
+}
+
+.line-3.egg-2 {
+  top: 110px;
+  left: 230px;
+}
+
+.line-3.egg-3 {
+  top: 120px;
+  left: 210px;
+}
+
+.line-3.egg-4 {
+  top: 130px;
+  left: 190px;
 }

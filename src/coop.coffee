@@ -1,5 +1,5 @@
 class @Coop
-  constructor: (@eggView)->
+  constructor: (@randomizer, @eggView)->
     @eggsPresent = []
 
   init: ->
@@ -7,7 +7,7 @@ class @Coop
     setInterval (=> @tick()), 500
 
   throwNewEgg: ->
-    @eggsPresent.unshift(new Egg(@eggView))
+    @eggsPresent.unshift(new Egg(@randomizer.nextRandomLine(), @eggView))
 
   tick: ->
     egg = @eggsPresent.pop()

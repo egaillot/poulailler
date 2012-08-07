@@ -1,7 +1,7 @@
 class @EggView
 
-  display: (position)->
-    $(".egg-#{position}").show()
+  display: (line, position)->
+    $(".line-#{line}.egg-#{position}").show()
 
-  erase: (position)->
-    $(".egg-#{position}").hide()
+  erase: (line, position)->
+    $(".line-#{line}.egg-#{position}").hide()
