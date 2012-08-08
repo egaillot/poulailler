@@ -12,10 +12,10 @@ class @Egg
     @show()
 
   show: ->
-    @view.display @line, @position
+    @view.displayEgg @line, @position
 
   hide: ->
-    @view.erase @line, @position
+    @view.eraseEgg @line, @position
 
   aboutToFall: ->
     @position == EGG_ABOUT_TO_FALL_POSITION

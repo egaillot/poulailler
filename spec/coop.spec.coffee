@@ -1,9 +1,9 @@
 describe 'The Chicken Coop', ->
 
   beforeEach ->
-    @eggView =
-      display: ->
-      erase: ->
+    @view =
+      displayEgg: ->
+      eraseEgg: ->
 
     @randomizer = 
       nextRandomLine: ->
@@ -11,19 +11,19 @@ describe 'The Chicken Coop', ->
         return @cpt = 10
 
   it 'can throw an egg down the line', ->
-    coop = new Coop @randomizer, @eggView
+    coop = new Coop @randomizer, @view
     expect(coop.eggsPresent.length).toEqual 0
     coop.throwNewEgg()
     expect(coop.eggsPresent.length).toEqual 1
 
   it 'can move an egg down the line', ->
-    coop = new Coop @randomizer, @eggView
+    coop = new Coop @randomizer, @view
     coop.throwNewEgg()
     coop.tick()
     expect(coop.eggsPresent[0].position).toEqual 1
 
   it 'throws new egg when current egg at end of line', ->
-    coop = new Coop @randomizer, @eggView
+    coop = new Coop @randomizer, @view
     coop.throwNewEgg()
     expect(coop.eggsPresent[0].line).toEqual 10
 
