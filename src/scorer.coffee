@@ -12,13 +12,16 @@ class @Scorer
     @levelThresholds[level]
 
   changeLevelThreshold: (level, threshold)->
-    @levelThresholds[level] = threshold
+    @levelThresholds[threshold] = level
 
-  atLevel: (l)->
-    @score == @levelThresholds[l] 
+  hasReachedNewLevel: ->
+    @levelThresholds[@score] != undefined
+
+  levelReached: ->
+    @levelThresholds[@score]
 
   resetLevelThresholds: ->
     @levelThresholds =
-      1: 0
-      2: 5
-      3: 20
+      0: 1
+      5: 2
+      20: 3

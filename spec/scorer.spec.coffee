@@ -21,20 +21,19 @@ describe "A scorer", ->
       @scorer.changeLevelThreshold 3, 20
 
     it 'before level 2', ->
-      expect(@scorer.atLevel 2).toBeFalsy()
-      expect(@scorer.atLevel 3).toBeFalsy()
+      @scorer.score = 1
+      expect(@scorer.hasReachedNewLevel()).toBeFalsy()
 
     it 'at level 2', ->
       @scorer.score = 18
-      expect(@scorer.atLevel 2).toBeTruthy()
-      expect(@scorer.atLevel 3).toBeFalsy()
+      expect(@scorer.hasReachedNewLevel()).toBeTruthy()
+      expect(@scorer.levelReached()).toEqual 2
 
     it 'between level 2 and level 3', ->
       @scorer.score = 19
-      expect(@scorer.atLevel 2).toBeFalsy()
-      expect(@scorer.atLevel 3).toBeFalsy()
+      expect(@scorer.hasReachedNewLevel()).toBeFalsy()
 
     it 'at level 3', ->
       @scorer.score = 20
-      expect(@scorer.atLevel 2).toBeFalsy()
-      expect(@scorer.atLevel 3).toBeTruthy()
+      expect(@scorer.hasReachedNewLevel()).toBeTruthy()
+      expect(@scorer.levelReached()).toEqual 3

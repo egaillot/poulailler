@@ -24,7 +24,10 @@ class @Coop
     egg.hide()
     @scorer.addPoint()
     @throwNewEgg()
-    if @scorer.atLevel 2
+    @handleNewLevelReached() if @scorer.hasReachedNewLevel()
+
+  handleNewLevelReached: ->
+    if @scorer.levelReached() == 2
       setTimeout =>
         @throwNewEgg()
         @tickDuration /= 2

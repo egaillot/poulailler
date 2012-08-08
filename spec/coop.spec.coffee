@@ -12,7 +12,7 @@ describe 'The Chicken Coop', ->
 
     @scorer = 
       addPoint: jasmine.createSpy 'addPoint'
-      atLevel: (l) -> l == 1
+      hasReachedNewLevel: -> false
 
     @coop = new Coop @scorer, @randomizer, @view
 
@@ -46,7 +46,8 @@ describe 'The Chicken Coop', ->
     expect(@scorer.addPoint).toHaveBeenCalled()
 
   it 'throws more eggs at once when reaching higher levels', ->
-    @scorer.atLevel = (l) -> l == 2
+    @scorer.hasReachedNewLevel = -> true
+    @scorer.levelReached = -> 2
     @coop.tickDuration = 100
 
     @coop.throwNewEgg()
