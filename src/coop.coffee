@@ -1,3 +1,10 @@
+TICKS_BEFORE_THROWING_NEW_EGG = 
+  2: 2.5
+  3: 4
+  4: 1
+  5: 3
+  6: 2
+
 class @Coop
   constructor: (@scorer, @randomizer, @view)->
     @eggsPresent = []
@@ -27,11 +34,12 @@ class @Coop
     @handleNewLevelReached() if @scorer.hasReachedNewLevel()
 
   handleNewLevelReached: ->
-    if @scorer.levelReached() == 2
-      setTimeout =>
-        @throwNewEgg()
-        @tickDuration /= 2
-      , @tickDuration * 2.5
+    levelReached = @scorer.levelReached()
+    ticks = TICKS_BEFORE_THROWING_NEW_EGG[levelReached]
+    setTimeout =>
+      @throwNewEgg()
+      @tickDuration /= 2 if levelReached == 2
+    , ticks * @tickDuration
 
   handleMovingEgg: (egg)->
     egg.move()

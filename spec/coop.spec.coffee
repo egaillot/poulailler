@@ -45,16 +45,29 @@ describe 'The Chicken Coop', ->
 
     expect(@scorer.addPoint).toHaveBeenCalled()
 
-  it 'throws more eggs at once when reaching higher levels', ->
-    @scorer.hasReachedNewLevel = -> true
-    @scorer.levelReached = -> 2
-    @coop.tickDuration = 100
+  describe 'throws more eggs at once when reaching higher levels', ->
+    beforeEach ->
+      @scorer.hasReachedNewLevel = -> true
+      @coop.tickDuration = 100
 
-    @coop.throwNewEgg()
-    @coop.tick() for i in [0..4]
+    it 'at level 2', ->
+      @scorer.levelReached = -> 2
 
-    waits(250)
+      @coop.throwNewEgg()
+      @coop.tick() for i in [0..4]
 
-    runs => 
-      expect(@coop.eggsPresent.length).toEqual 2
-      expect(@coop.tickDuration).toEqual 50
+      waits(250)
+      runs => 
+        expect(@coop.eggsPresent.length).toEqual 2
+        expect(@coop.tickDuration).toEqual 50
+
+    it 'at level 3', ->
+      @scorer.levelReached = -> 3
+
+      @coop.throwNewEgg()
+      @coop.tick() for i in [0..4]
+
+      waits(400)
+      runs =>
+        expect(@coop.eggsPresent.length).toEqual 2
+        expect(@coop.tickDuration).toEqual 100

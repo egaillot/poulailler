@@ -12,6 +12,7 @@ class @Scorer
     @levelThresholds[level]
 
   changeLevelThreshold: (level, threshold)->
+    delete @levelThresholds[threshold]
     @levelThresholds[threshold] = level
 
   hasReachedNewLevel: ->
@@ -25,3 +26,6 @@ class @Scorer
       0: 1
       5: 2
       20: 3
+      80: 4
+      150: 5
+      290: 6
