@@ -6,40 +6,46 @@
     <script src="lib/coffee-script.js"></script>
     <script type="text/coffeescript" src="src/view.coffee"></script>
     <script type="text/coffeescript" src="src/egg.coffee"></script>
+    <script type="text/coffeescript" src="src/scorer.coffee"></script>
     <script type="text/coffeescript" src="src/coop.coffee"></script>
   </head>
   <body>
-    <div class="line-0 egg-0">O</div>
-    <div class="line-0 egg-1">O</div>
-    <div class="line-0 egg-2">O</div>
-    <div class="line-0 egg-3">O</div>
-    <div class="line-0 egg-4">O</div>
+    <div class="score"></div>
+    <div class="sprites">
+      <div class="line-0 egg-0">O</div>
+      <div class="line-0 egg-1">O</div>
+      <div class="line-0 egg-2">O</div>
+      <div class="line-0 egg-3">O</div>
+      <div class="line-0 egg-4">O</div>
 
-    <div class="line-1 egg-0">O</div>
-    <div class="line-1 egg-1">O</div>
-    <div class="line-1 egg-2">O</div>
-    <div class="line-1 egg-3">O</div>
-    <div class="line-1 egg-4">O</div>
+      <div class="line-1 egg-0">O</div>
+      <div class="line-1 egg-1">O</div>
+      <div class="line-1 egg-2">O</div>
+      <div class="line-1 egg-3">O</div>
+      <div class="line-1 egg-4">O</div>
 
-    <div class="line-2 egg-0">O</div>
-    <div class="line-2 egg-1">O</div>
-    <div class="line-2 egg-2">O</div>
-    <div class="line-2 egg-3">O</div>
-    <div class="line-2 egg-4">O</div>
+      <div class="line-2 egg-0">O</div>
+      <div class="line-2 egg-1">O</div>
+      <div class="line-2 egg-2">O</div>
+      <div class="line-2 egg-3">O</div>
+      <div class="line-2 egg-4">O</div>
 
-    <div class="line-3 egg-0">O</div>
-    <div class="line-3 egg-1">O</div>
-    <div class="line-3 egg-2">O</div>
-    <div class="line-3 egg-3">O</div>
-    <div class="line-3 egg-4">O</div>
+      <div class="line-3 egg-0">O</div>
+      <div class="line-3 egg-1">O</div>
+      <div class="line-3 egg-2">O</div>
+      <div class="line-3 egg-3">O</div>
+      <div class="line-3 egg-4">O</div>
+    </div>
 
     <script type="text/coffeescript">
+      view = new View
+      scorer = new Scorer view
       randomizer = 
         nextRandomLine: ->
           return @cpt = (@cpt + 1) % 4 unless @cpt == undefined
           return @cpt = 0
 
-      coop = new Coop randomizer, new View
+      coop = new Coop scorer, randomizer, view
       coop.init()
     </script>
   </body>

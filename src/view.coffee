@@ -5,3 +5,6 @@ class @View
 
   eraseEgg: (line, position)->
     $(".line-#{line}.egg-#{position}").hide()
+
+  displayScore: (score)->
+    $('.score').text score

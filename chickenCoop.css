@@ -1,8 +1,8 @@
-body {
+.sprites {
   position: relative;
 }
 
-body > * {
+.sprites > * {
   display: none;
   position: absolute;
 }

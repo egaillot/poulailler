@@ -2,8 +2,8 @@ describe "An egg", ->
 
   beforeEach ->
     @view =
-      displayEgg: jasmine.createSpy('displayEgg')
-      eraseEgg: jasmine.createSpy('eraseEgg')
+      displayEgg: jasmine.createSpy 'displayEgg'
+      eraseEgg: jasmine.createSpy 'eraseEgg'
 
   it "can display itself", ->
     egg = new Egg 42, @view
