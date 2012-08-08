@@ -40,12 +40,15 @@
     <script type="text/coffeescript">
       view = new View
       scorer = new Scorer view
+      scorer.changeLevelThreshold 2, 1
+
       randomizer = 
         nextRandomLine: ->
           return @cpt = (@cpt + 1) % 4 unless @cpt == undefined
           return @cpt = 0
 
       coop = new Coop scorer, randomizer, view
+      coop.tickDuration = 300
       coop.init()
     </script>
   </body>

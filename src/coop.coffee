@@ -1,20 +1,35 @@
 class @Coop
   constructor: (@scorer, @randomizer, @view)->
     @eggsPresent = []
+    @tickDuration = 500
 
   init: ->
     @throwNewEgg()
-    setInterval (=> @tick()), 500
+    @fireNextTick()
+
+  fireNextTick: ->
+    setTimeout => 
+      @tick()
+      @fireNextTick()
+    , @tickDuration
 
   throwNewEgg: ->
     @eggsPresent.unshift(new Egg(@randomizer.nextRandomLine(), @view))
 
   tick: ->
     egg = @eggsPresent.pop()
-    if egg.aboutToFall()
-      egg.hide()
-      @scorer.addPoint()
-      @throwNewEgg()
-    else
-      egg.move()
-      @eggsPresent.unshift(egg)
+    if egg.aboutToFall() then @handleFallingEgg(egg) else @handleMovingEgg(egg)
+
+  handleFallingEgg: (egg)->
+    egg.hide()
+    @scorer.addPoint()
+    @throwNewEgg()
+    if @scorer.atLevel 2
+      setTimeout =>
+        @throwNewEgg()
+        @tickDuration /= 2
+      , @tickDuration * 2.5
+
+  handleMovingEgg: (egg)->
+    egg.move()
+    @eggsPresent.unshift(egg)
