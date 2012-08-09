@@ -6,18 +6,29 @@
     <script type="text/coffeescript" src="../src/view.coffee"></script>
   </head>
   <body>
-    <div class="line-0 egg-0" style="display: none;">First</div>
-    <div class="line-0 egg-1" style="display: none;">Second</div>
     <div>
-      Score : <div class="score">42</div>
+      Egg: 
+      <span class="line-0 egg-0" style="display: none;">First</span>
+      <span class="line-1 egg-1" style="display: none;">Second</span>
     </div>
+    <div>
+      Bucket:
+      <span class="bucket-0" style="display: none;">Left</span>
+      <span class="bucket-1" style="display: none;">Right</span>
+    </div>
+    <div>Score: <span class="score">42</span></div>
 
     <script type="text/coffeescript">
       view = new View
       view.displayEgg 0, 0
+      view.displayBucket 1
       setTimeout ->
         view.eraseEgg 0, 0
-        view.displayEgg 0, 1
+        view.displayEgg 1, 1
+        
+        view.eraseBucket 1
+        view.displayBucket 0
+        
         view.displayScore 4807
       , 1000
     </script>
