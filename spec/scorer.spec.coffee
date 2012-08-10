@@ -9,6 +9,11 @@ describe "A scorer", ->
     @scorer.addPoint()
     expect(@scorer.score).toEqual 1
 
+  it "keeps track of misses", ->
+    expect(@scorer.misses).toEqual 0
+    @scorer.addMiss(1)
+    expect(@scorer.misses).toEqual 1
+
   it "displays itself", ->
     @scorer = new Scorer @view
     expect(@view.displayScore).toHaveBeenCalledWith 0
