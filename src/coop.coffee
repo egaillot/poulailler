@@ -6,7 +6,8 @@ TICKS_BEFORE_THROWING_NEW_EGG =
   6: 2
 
 class @Coop
-  constructor: (@scorer, @randomizer, @view)->
+  constructor: (@scorer, @randomizer, @view, @userInput)->
+    new Bucket @view, @userInput
     @eggsPresent = []
     @tickDuration = 500
 

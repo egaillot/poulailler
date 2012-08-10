@@ -1,11 +1,16 @@
 describe 'The Chicken Coop', ->
 
   beforeEach ->
-    @view =
+    view =
       displayEgg: ->
       eraseEgg: ->
+      displayBucket: ->
+      eraseBucket: ->
 
-    @randomizer = 
+    userInput =
+      onBucketPositionChange: ->
+
+    randomizer = 
       nextRandomLine: ->
         return @cpt += 1 unless @cpt == undefined
         return @cpt = 10
@@ -14,7 +19,7 @@ describe 'The Chicken Coop', ->
       addPoint: jasmine.createSpy 'addPoint'
       hasReachedNewLevel: -> false
 
-    @coop = new Coop @scorer, @randomizer, @view
+    @coop = new Coop @scorer, randomizer, view, userInput
 
   it 'can throw an egg down the line', ->
     expect(@coop.eggsPresent.length).toEqual 0
