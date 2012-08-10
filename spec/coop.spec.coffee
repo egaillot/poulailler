@@ -7,19 +7,19 @@ describe 'The Chicken Coop', ->
       displayBucket: ->
       eraseBucket: ->
 
-    userInput =
-      onBucketPositionChange: ->
+    @userInput =
+      onBucketPositionChange: (@callback)->
 
     randomizer = 
       nextRandomLine: ->
         return @cpt += 1 unless @cpt == undefined
-        return @cpt = 10
+        return @cpt = 0
 
     @scorer = 
       addPoint: jasmine.createSpy 'addPoint'
-      hasReachedNewLevel: -> false
+      hasReachedNewLevel: jasmine.createSpy('hasReachedNewLevel').andReturn false
 
-    @coop = new Coop @scorer, randomizer, view, userInput
+    @coop = new Coop @scorer, randomizer, view, @userInput
 
   it 'can throw an egg down the line', ->
     expect(@coop.eggsPresent.length).toEqual 0
@@ -33,13 +33,13 @@ describe 'The Chicken Coop', ->
 
   it 'throws new egg when current egg at end of line', ->
     @coop.throwNewEgg()
-    expect(@coop.eggsPresent[0].line).toEqual 10
+    expect(@coop.eggsPresent[0].line).toEqual 0
 
     @coop.tick() for i in [0..4]
 
     expect(@coop.eggsPresent.length).toEqual 1
     expect(@coop.eggsPresent[0].position).toEqual 0
-    expect(@coop.eggsPresent[0].line).toEqual 11
+    expect(@coop.eggsPresent[0].line).toEqual 1
 
   it 'keeps count of how many eggs have fallen', ->
     @coop.throwNewEgg()
@@ -49,6 +49,23 @@ describe 'The Chicken Coop', ->
     @coop.tick()
 
     expect(@scorer.addPoint).toHaveBeenCalled()
+
+
+
+
+  describe 'when bucket not under falling egg', ->
+    beforeEach ->
+      @coop.throwNewEgg()
+      @userInput.callback UserInput.LOWER_RIGHT
+      @coop.tick() for i in [0..4]
+
+    it 'does not add point', ->
+      expect(@scorer.addPoint).wasNotCalled()
+
+    it 'does not check whether a new level has been reached', ->
+      expect(@scorer.hasReachedNewLevel).wasNotCalled()
+
+
 
   describe 'throws more eggs at once when reaching higher levels', ->
     beforeEach ->

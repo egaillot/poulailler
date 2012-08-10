@@ -7,7 +7,7 @@ TICKS_BEFORE_THROWING_NEW_EGG =
 
 class @Coop
   constructor: (@scorer, @randomizer, @view, @userInput)->
-    new Bucket @view, @userInput
+    @bucket = new Bucket @view, @userInput
     @eggsPresent = []
     @tickDuration = 500
 
@@ -30,9 +30,10 @@ class @Coop
 
   handleFallingEgg: (egg)->
     egg.hide()
-    @scorer.addPoint()
+    if egg.line == @bucket.position
+      @scorer.addPoint()
+      @handleNewLevelReached() if @scorer.hasReachedNewLevel()
     @throwNewEgg()
-    @handleNewLevelReached() if @scorer.hasReachedNewLevel()
 
   handleNewLevelReached: ->
     levelReached = @scorer.levelReached()
