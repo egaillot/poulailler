@@ -2,15 +2,17 @@ class @Scorer
   constructor: (@view)->
     @score = 0
     @misses = 0
-    @view.displayScore(@score) 
+    @view.displayScore @score
+    @view.displayMiss @misses
     @resetLevelThresholds()
 
   addPoint: ->
     @score += 1
-    @view.displayScore(@score) 
+    @view.displayScore @score
 
-  addMiss: ->
-    @misses += 1
+  addMiss: (m)->
+    @misses += m
+    @view.displayMiss @misses
 
   changeLevelThreshold: (level, threshold)->
     delete @levelThresholds[threshold]

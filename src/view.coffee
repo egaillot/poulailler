@@ -14,3 +14,6 @@ class @View
 
   displayScore: (score)->
     $('.score').text score
+
+  displayMiss: (miss)->
+    $('.miss').text miss

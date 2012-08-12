@@ -17,6 +17,7 @@ describe 'The Chicken Coop', ->
 
     @scorer = 
       addPoint: jasmine.createSpy 'addPoint'
+      addMiss: jasmine.createSpy 'addMiss'
       hasReachedNewLevel: jasmine.createSpy('hasReachedNewLevel').andReturn false
 
     @coop = new Coop @scorer, randomizer, view, @userInput
@@ -58,6 +59,9 @@ describe 'The Chicken Coop', ->
       @coop.throwNewEgg()
       @userInput.callback UserInput.LOWER_RIGHT
       @coop.tick() for i in [0..4]
+
+    it 'updates missed points', ->
+      expect(@scorer.addMiss).toHaveBeenCalledWith 1
 
     it 'does not add point', ->
       expect(@scorer.addPoint).wasNotCalled()

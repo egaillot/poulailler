@@ -2,6 +2,7 @@ describe "A scorer", ->
   beforeEach ->
     @view =
       displayScore: jasmine.createSpy 'displayScore'
+      displayMiss: jasmine.createSpy 'displayMiss'
     @scorer = new Scorer @view
       
   it "keeps track of score", ->
@@ -11,14 +12,20 @@ describe "A scorer", ->
 
   it "keeps track of misses", ->
     expect(@scorer.misses).toEqual 0
-    @scorer.addMiss(1)
+    @scorer.addMiss 1
     expect(@scorer.misses).toEqual 1
 
-  it "displays itself", ->
-    @scorer = new Scorer @view
+  it "displays score", ->
     expect(@view.displayScore).toHaveBeenCalledWith 0
     @scorer.addPoint()
     expect(@view.displayScore).toHaveBeenCalledWith 1
+
+  it "displays misses", ->
+    expect(@view.displayMiss).toHaveBeenCalledWith 0
+    @scorer.addMiss 1
+    expect(@view.displayMiss).toHaveBeenCalledWith 1
+    @scorer.addMiss 3
+    expect(@view.displayMiss).toHaveBeenCalledWith 4
 
   describe "tells which level we've reached", ->
     beforeEach ->

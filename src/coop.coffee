@@ -33,6 +33,8 @@ class @Coop
     if egg.line == @bucket.position
       @scorer.addPoint()
       @handleNewLevelReached() if @scorer.hasReachedNewLevel()
+    else
+      @scorer.addMiss 1
     @throwNewEgg()
 
   handleNewLevelReached: ->
