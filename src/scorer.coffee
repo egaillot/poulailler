@@ -14,6 +14,9 @@ class @Scorer
     @misses += m
     @view.displayMiss @misses
 
+  gameOver: ->
+    @misses >= 6
+
   changeLevelThreshold: (level, threshold)->
     delete @levelThresholds[threshold]
     @levelThresholds[threshold] = level

@@ -27,6 +27,12 @@ describe "A scorer", ->
     @scorer.addMiss 3
     expect(@view.displayMiss).toHaveBeenCalledWith 4
 
+  it "tells game is over at 6th missed point", ->
+    @scorer.misses = 5
+    expect(@scorer.gameOver()).toBeFalsy()
+    @scorer.addMiss 1
+    expect(@scorer.gameOver()).toBeTruthy()
+
   describe "tells which level we've reached", ->
     beforeEach ->
       @scorer.changeLevelThreshold 2, 18
