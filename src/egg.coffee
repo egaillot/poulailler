@@ -19,3 +19,6 @@ class @Egg
 
   aboutToFall: ->
     @position == EGG_ABOUT_TO_FALL_POSITION
+
+  side: ->
+    if @line % 2 == 0 then View.LEFT else View.RIGHT

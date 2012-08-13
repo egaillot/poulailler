@@ -17,17 +17,17 @@ class @Coop
 
   handleFallingEgg: (egg)->
     egg.hide()
-    if egg.line == @bucket.position then @handleEggCaught() else @handleEggMissed()
+    if egg.line == @bucket.position then @handleEggCaught() else @handleEggMissed egg
 
   handleEggCaught: ->
     @scorer.addPoint()
     @newLevelCallback(@scorer.levelReached()) if @scorer.hasReachedNewLevel()
     @throwNewEgg()
 
-  handleEggMissed: ->
+  handleEggMissed: (egg)->
     @inMissSequence = true
     @scorer.addMiss 1
-    @view.fireMissSequence =>
+    @view.fireMissSequence egg.side(), =>
       @inMissSequence = false
       @throwNewEgg()
 

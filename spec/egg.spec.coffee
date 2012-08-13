@@ -27,3 +27,21 @@ describe "An egg", ->
     expect(egg.aboutToFall()).toBeFalsy()
     egg.position = 4
     expect(egg.aboutToFall()).toBeTruthy()
+
+  describe "knows on which side it lies", ->
+    beforeEach ->
+      @expectSide = (expectedSide, eggLine)=>
+        egg = new Egg eggLine, @view
+        expect(egg.side()).toEqual expectedSide
+
+    it "on line 0", ->
+      @expectSide View.LEFT, 0
+
+    it "on line 1", ->
+      @expectSide View.RIGHT, 1
+
+    it "on line 2", ->
+      @expectSide View.LEFT, 2
+
+    it "on line 3", ->
+      @expectSide View.RIGHT, 3

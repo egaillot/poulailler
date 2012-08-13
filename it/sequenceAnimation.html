@@ -10,13 +10,16 @@
     <div id="item2" class="left-sequence" style="position: absolute; top: 60px; display: none;">0</div>
     <div id="item3" class="left-sequence" style="position: absolute; top: 70px; display: none;">0</div>
 
-    <div id="item4" class="line-1" style="position: absolute; top: 50px; left: 20px; display: none;">1</div>
-    <div id="item5" class="line-1" style="position: absolute; top: 60px; left: 20px; display: none;">1</div>
-    <div id="item6" class="line-1" style="position: absolute; top: 70px; left: 20px; display: none;">1</div>
+    <div id="item4" class="right-sequence" style="position: absolute; top: 50px; left: 20px; display: none;">1</div>
+    <div id="item5" class="right-sequence" style="position: absolute; top: 60px; left: 20px; display: none;">1</div>
+    <div id="item6" class="right-sequence" style="position: absolute; top: 70px; left: 20px; display: none;">1</div>
 
     <script type="text/coffeescript">
       view = new View
-      view.fireMissSequence (-> console.log 'Animated left sequence')
+      view.fireMissSequence View.LEFT, -> 
+        console.log 'Animated left sequence'
+        view.fireMissSequence View.RIGHT, ->
+          console.log 'Animated right sequence'
     </script>
   </body>
 </html>

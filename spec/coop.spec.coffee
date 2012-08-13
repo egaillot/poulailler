@@ -1,5 +1,4 @@
 describe 'The Chicken Coop', ->
-
   beforeEach ->
     @view =
       displayEgg: ->
@@ -11,7 +10,7 @@ describe 'The Chicken Coop', ->
     @userInput =
       onBucketPositionChange: (@callback)->
 
-    randomizer = 
+    @randomizer = 
       nextRandomLine: ->
         return @cpt += 1 unless @cpt == undefined
         return @cpt = 0
@@ -21,7 +20,7 @@ describe 'The Chicken Coop', ->
       addMiss: jasmine.createSpy 'addMiss'
       hasReachedNewLevel: jasmine.createSpy('hasReachedNewLevel').andReturn false
 
-    @coop = new Coop @scorer, randomizer, @view, @userInput
+    @coop = new Coop @scorer, @randomizer, @view, @userInput
 
   it 'can throw an egg down the line', ->
     expect(@coop.eggsPresent.length).toEqual 0
@@ -81,3 +80,15 @@ describe 'The Chicken Coop', ->
 
     it 'gets into miss sequence', ->
       expect(@view.fireMissSequence).toHaveBeenCalled()
+      expect(@view.fireMissSequence.mostRecentCall.args[0]).toEqual View.LEFT
+
+
+
+  it 'fires right miss sequence when egg breaks on right', ->
+    @randomizer.nextRandomLine = -> 1
+    @coop.throwNewEgg()
+    @userInput.callback UserInput.LOWER_LEFT
+    @coop.tick() for i in [0..4]
+
+    expect(@view.fireMissSequence).toHaveBeenCalled()
+    expect(@view.fireMissSequence.mostRecentCall.args[0]).toEqual View.RIGHT

@@ -16,6 +16,10 @@ animateSequence = ($sequence, stepDuration, callback)->
   showNextElement $sequence
 
 
+
+LEFT = 'left'
+RIGHT = 'right'
+
 class @View
 
   displayEgg: (line, position)->
@@ -36,5 +40,10 @@ class @View
   displayMiss: (miss)->
     $('.miss').text miss
 
-  fireMissSequence: (callback)->
-    animateSequence $('.left-sequence'), 500, callback
+  fireMissSequence: (side, callback)->
+    sequence = '.right-sequence'
+    sequence = '.left-sequence' if side == LEFT
+    animateSequence $(sequence), 500, callback
+
+@View.LEFT = LEFT
+@View.RIGHT = RIGHT
