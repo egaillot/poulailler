@@ -7,6 +7,7 @@ TICKS_BEFORE_THROWING_NEW_EGG =
 
 class @Coop
   constructor: (@scorer, @randomizer, @view, @userInput)->
+    @inMissSequence = false
     @bucket = new Bucket @view, @userInput
     @eggsPresent = []
     @tickDuration = 500
@@ -17,7 +18,7 @@ class @Coop
 
   fireNextTick: ->
     setTimeout => 
-      @tick()
+      @tick() unless @inMissSequence
       @fireNextTick()
     , @tickDuration
 
@@ -30,11 +31,11 @@ class @Coop
 
   handleFallingEgg: (egg)->
     egg.hide()
-    if egg.line == @bucket.position
-      @scorer.addPoint()
-      @handleNewLevelReached() if @scorer.hasReachedNewLevel()
-    else
-      @scorer.addMiss 1
+    if egg.line == @bucket.position then @handleEggCaught() else @handleEggMissed()
+
+  handleEggCaught: ->
+    @scorer.addPoint()
+    @handleNewLevelReached() if @scorer.hasReachedNewLevel()
     @throwNewEgg()
 
   handleNewLevelReached: ->
@@ -44,6 +45,13 @@ class @Coop
       @throwNewEgg()
       @tickDuration /= 2 if levelReached == 2
     , ticks * @tickDuration
+
+  handleEggMissed: ->
+    @inMissSequence = true
+    @scorer.addMiss 1
+    @view.fireMissSequence =>
+      @inMissSequence = false
+      @throwNewEgg()
 
   handleMovingEgg: (egg)->
     egg.move()

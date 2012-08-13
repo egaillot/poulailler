@@ -1,11 +1,12 @@
 describe 'The Chicken Coop', ->
 
   beforeEach ->
-    view =
+    @view =
       displayEgg: ->
       eraseEgg: ->
       displayBucket: ->
       eraseBucket: ->
+      fireMissSequence: jasmine.createSpy 'fireMissSequence'
 
     @userInput =
       onBucketPositionChange: (@callback)->
@@ -20,7 +21,7 @@ describe 'The Chicken Coop', ->
       addMiss: jasmine.createSpy 'addMiss'
       hasReachedNewLevel: jasmine.createSpy('hasReachedNewLevel').andReturn false
 
-    @coop = new Coop @scorer, randomizer, view, @userInput
+    @coop = new Coop @scorer, randomizer, @view, @userInput
 
   it 'can throw an egg down the line', ->
     expect(@coop.eggsPresent.length).toEqual 0
@@ -54,7 +55,7 @@ describe 'The Chicken Coop', ->
 
 
 
-  describe 'when bucket not under falling egg', ->
+  describe '(when bucket not under falling egg)', ->
     beforeEach ->
       @coop.throwNewEgg()
       @userInput.callback UserInput.LOWER_RIGHT
@@ -69,6 +70,8 @@ describe 'The Chicken Coop', ->
     it 'does not check whether a new level has been reached', ->
       expect(@scorer.hasReachedNewLevel).wasNotCalled()
 
+    it 'gets into miss sequence', ->
+      expect(@view.fireMissSequence).toHaveBeenCalled()
 
 
   describe 'throws more eggs at once when reaching higher levels', ->
@@ -82,7 +85,7 @@ describe 'The Chicken Coop', ->
       @coop.throwNewEgg()
       @coop.tick() for i in [0..4]
 
-      waits(250)
+      waits 250
       runs => 
         expect(@coop.eggsPresent.length).toEqual 2
         expect(@coop.tickDuration).toEqual 50

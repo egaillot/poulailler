@@ -1,3 +1,21 @@
+animateSequence = ($sequence, stepDuration, callback)->
+  blink = ($sprite)->
+    $sprite.show()
+    setTimeout (-> $sprite.hide()), stepDuration
+
+  showNextElement = ($sequence)->
+    blink($sequence.eq 0);
+    animate($sequence[1..($sequence.length - 1)])
+
+  animate = ($sequence) ->
+    whatToDo = (-> showNextElement($sequence))
+    whatToDo = callback if ($sequence.length == 0) 
+    setTimeout whatToDo, stepDuration
+
+  return if ($sequence.length == 0)
+  showNextElement $sequence
+
+
 class @View
 
   displayEgg: (line, position)->
@@ -17,3 +35,6 @@ class @View
 
   displayMiss: (miss)->
     $('.miss').text miss
+
+  fireMissSequence: (callback)->
+    animateSequence $('.left-sequence'), 500, callback
