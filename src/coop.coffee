@@ -1,31 +1,17 @@
-TICKS_BEFORE_THROWING_NEW_EGG = 
-  2: 2.5
-  3: 4
-  4: 1
-  5: 3
-  6: 2
-
 class @Coop
   constructor: (@scorer, @randomizer, @view, @userInput)->
+    @newLevelCallback = ->
     @inMissSequence = false
     @bucket = new Bucket @view, @userInput
     @eggsPresent = []
-    @tickDuration = 500
 
-  init: ->
-    @throwNewEgg()
-    @fireNextTick()
-
-  fireNextTick: ->
-    setTimeout => 
-      @tick() unless @inMissSequence
-      @fireNextTick()
-    , @tickDuration
+  onReachingNewLevel: (@newLevelCallback)->
 
   throwNewEgg: ->
     @eggsPresent.unshift(new Egg(@randomizer.nextRandomLine(), @view))
 
   tick: ->
+    return if @inMissSequence
     egg = @eggsPresent.pop()
     if egg.aboutToFall() then @handleFallingEgg(egg) else @handleMovingEgg(egg)
 
@@ -35,16 +21,8 @@ class @Coop
 
   handleEggCaught: ->
     @scorer.addPoint()
-    @handleNewLevelReached() if @scorer.hasReachedNewLevel()
+    @newLevelCallback(@scorer.levelReached()) if @scorer.hasReachedNewLevel()
     @throwNewEgg()
-
-  handleNewLevelReached: ->
-    levelReached = @scorer.levelReached()
-    ticks = TICKS_BEFORE_THROWING_NEW_EGG[levelReached]
-    setTimeout =>
-      @throwNewEgg()
-      @tickDuration /= 2 if levelReached == 2
-    , ticks * @tickDuration
 
   handleEggMissed: ->
     @inMissSequence = true

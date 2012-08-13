@@ -10,6 +10,7 @@
     <script type="text/coffeescript" src="src/egg.coffee"></script>
     <script type="text/coffeescript" src="src/scorer.coffee"></script>
     <script type="text/coffeescript" src="src/coop.coffee"></script>
+    <script type="text/coffeescript" src="src/sequencer.coffee"></script>
   </head>
   <body>
     <div>Score: <span class="score"></span></div>
@@ -62,8 +63,8 @@
           return @cpt = 0
 
       coop = new Coop scorer, randomizer, view, userInput
-      coop.tickDuration = 500
-      coop.init()
+      sequencer = new Sequencer 500, coop
+      sequencer.init()
     </script>
   </body>
 </html>
