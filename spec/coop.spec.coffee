@@ -33,25 +33,34 @@ describe 'The Chicken Coop', ->
     @coop.tick()
     expect(@coop.eggsPresent[0].position).toEqual 1
 
-  it 'throws new egg when current egg at end of line', ->
-    @coop.throwNewEgg()
-    expect(@coop.eggsPresent[0].line).toEqual 0
-
-    @coop.tick() for i in [0..4]
-
-    expect(@coop.eggsPresent.length).toEqual 1
-    expect(@coop.eggsPresent[0].position).toEqual 0
-    expect(@coop.eggsPresent[0].line).toEqual 1
-
   it 'keeps count of how many eggs have fallen', ->
     @coop.throwNewEgg()
     @coop.tick() for i in [0..3]
     expect(@scorer.addPoint).wasNotCalled()
-
     @coop.tick()
-
     expect(@scorer.addPoint).toHaveBeenCalled()
 
+
+
+    
+  describe '(when egg falls into bucket)', ->
+    beforeEach ->
+      @scorer.hasReachedNewLevel = -> true
+      @scorer.levelReached = -> 3
+      @gotNotified = 0
+      @coop.onReachingNewLevel (newLevel)=> @gotNotified = newLevel
+
+      @coop.throwNewEgg()
+      expect(@coop.eggsPresent[0].line).toEqual 0
+      @coop.tick() for i in [0..4]
+
+    it 'signals when reaching new level', ->
+      expect(@gotNotified).toEqual 3
+
+    it 'throws new egg when current egg at end of line', ->
+      expect(@coop.eggsPresent.length).toEqual 1
+      expect(@coop.eggsPresent[0].position).toEqual 0
+      expect(@coop.eggsPresent[0].line).toEqual 1
 
 
 
