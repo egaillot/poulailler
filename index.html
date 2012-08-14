@@ -11,6 +11,7 @@
     <script type="text/coffeescript" src="src/scorer.coffee"></script>
     <script type="text/coffeescript" src="src/coop.coffee"></script>
     <script type="text/coffeescript" src="src/sequencer.coffee"></script>
+    <script type="text/coffeescript" src="src/game.coffee"></script>
   </head>
   <body>
     <div>Score: <span class="score"></span></div>
@@ -61,18 +62,8 @@
     </div>
 
     <script type="text/coffeescript">
-      userInput = new UserInput
-      view = new View
-      scorer = new Scorer view
-
-      randomizer = 
-        nextRandomLine: ->
-          return @cpt = (@cpt + 1) % 4 unless @cpt == undefined
-          return @cpt = 0
-
-      coop = new Coop scorer, randomizer, view, userInput
-      sequencer = new Sequencer 500, coop
-      sequencer.init()
+      game = new Game()
+      game.init()
     </script>
   </body>
 </html>
