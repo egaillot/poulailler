@@ -5,7 +5,9 @@ describe 'The Chicken Coop', ->
       eraseEgg: ->
       displayBucket: ->
       eraseBucket: ->
-      fireMissSequence: jasmine.createSpy 'fireMissSequence'
+      fireMissSequence: jasmine.createSpy('fireMissSequence')
+                               .andCallFake (side, callback)-> callback()
+
 
     @userInput =
       onBucketPositionChange: (@callback)->
@@ -19,6 +21,7 @@ describe 'The Chicken Coop', ->
       addPoint: jasmine.createSpy 'addPoint'
       addMiss: jasmine.createSpy 'addMiss'
       hasReachedNewLevel: jasmine.createSpy('hasReachedNewLevel').andReturn false
+      gameOver: -> false
 
     @coop = new Coop @scorer, @randomizer, @view, @userInput
 
@@ -84,6 +87,7 @@ describe 'The Chicken Coop', ->
 
 
 
+
   it 'fires right miss sequence when egg breaks on right', ->
     @randomizer.nextRandomLine = -> 1
     @coop.throwNewEgg()
@@ -92,3 +96,14 @@ describe 'The Chicken Coop', ->
 
     expect(@view.fireMissSequence).toHaveBeenCalled()
     expect(@view.fireMissSequence.mostRecentCall.args[0]).toEqual View.RIGHT
+
+  it 'notifies when game is over', ->
+    @scorer.gameOver = -> true
+    gameOver = false
+    @coop.onGameOver(-> gameOver = true)
+
+    @coop.throwNewEgg()
+    @userInput.callback UserInput.LOWER_RIGHT
+    @coop.tick() for i in [0..4]
+
+    expect(gameOver).toBeTruthy()

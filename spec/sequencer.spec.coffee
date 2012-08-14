@@ -3,6 +3,7 @@ describe 'The Sequencer', ->
     beforeEach ->
       @coop =
         onReachingNewLevel: ->
+        onGameOver: ->
         throwNewEgg: jasmine.createSpy 'throwNewEgg'
       @sequencer = new Sequencer 100, @coop
 

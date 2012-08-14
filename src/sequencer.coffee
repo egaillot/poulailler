@@ -8,6 +8,7 @@ TICKS_BEFORE_THROWING_NEW_EGG =
 class @Sequencer
   constructor: (@tickDuration, @coop)->
     @coop.onReachingNewLevel (levelReached)=> @handleNewLevelReached(levelReached)
+    @coop.onGameOver => @gameOver = true
 
   handleNewLevelReached: (levelReached)->
     ticks = TICKS_BEFORE_THROWING_NEW_EGG[levelReached]
@@ -17,10 +18,12 @@ class @Sequencer
     , ticks * @tickDuration
 
   init: ->
+    @gameOver = false
     @coop.throwNewEgg()
     @fireNextTick()
 
   fireNextTick: ->
+    return if @gameOver
     setTimeout =>
       @coop.tick()
       @fireNextTick()

@@ -1,11 +1,14 @@
 class @Coop
   constructor: (@scorer, @randomizer, @view, @userInput)->
     @newLevelCallback = ->
+    @gameOverCallback = ->
     @inMissSequence = false
     @bucket = new Bucket @view, @userInput
     @eggsPresent = []
 
   onReachingNewLevel: (@newLevelCallback)->
+
+  onGameOver: (@gameOverCallback)->
 
   throwNewEgg: ->
     @eggsPresent.unshift(new Egg(@randomizer.nextRandomLine(), @view))
@@ -27,9 +30,15 @@ class @Coop
   handleEggMissed: (egg)->
     @inMissSequence = true
     @scorer.addMiss 1
-    @view.fireMissSequence egg.side(), =>
-      @inMissSequence = false
-      @throwNewEgg()
+    @fireMissSequence(egg.side())
+
+  fireMissSequence: (side)->
+    @view.fireMissSequence side, =>
+      if @scorer.gameOver()
+        @gameOverCallback()
+      else
+        @inMissSequence = false
+        @throwNewEgg()
 
   handleMovingEgg: (egg)->
     egg.move()
