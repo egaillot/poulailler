@@ -7,6 +7,7 @@ TICKS_BEFORE_THROWING_NEW_EGG =
 
 class @Sequencer
   constructor: (@tickDuration, @coop)->
+    @coop.onAccelerate => @tickDuration -= 5
     @coop.onReachingNewLevel (levelReached)=> @handleNewLevelReached(levelReached)
     @coop.onGameOver => @gameOver = true
 

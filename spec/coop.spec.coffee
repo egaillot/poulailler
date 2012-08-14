@@ -23,8 +23,21 @@ describe 'The Chicken Coop', ->
       addMiss: jasmine.createSpy 'addMiss'
       hasReachedNewLevel: jasmine.createSpy('hasReachedNewLevel').andReturn false
       gameOver: -> false
+      shouldAccelerate: -> false
 
     @coop = new Coop @scorer, @randomizer, @view, @userInput
+
+    @getNewEggInBucket = =>
+      @coop.throwNewEgg()
+      @coop.tick() for i in [0..4]
+
+    @getNewEggBroken = =>
+      @coop.throwNewEgg()
+      @userInput.callback UserInput.LOWER_RIGHT
+      @coop.tick() for i in [0..4]
+
+
+
 
   it 'can throw an egg down the line', ->
     expect(@coop.eggsPresent.length).toEqual 0
@@ -53,9 +66,7 @@ describe 'The Chicken Coop', ->
       @gotNotified = 0
       @coop.onReachingNewLevel (newLevel)=> @gotNotified = newLevel
 
-      @coop.throwNewEgg()
-      expect(@coop.eggsPresent[0].line).toEqual 0
-      @coop.tick() for i in [0..4]
+      @getNewEggInBucket()
 
     it 'signals when reaching new level', ->
       expect(@gotNotified).toEqual 3
@@ -69,9 +80,7 @@ describe 'The Chicken Coop', ->
 
   describe '(when bucket not under falling egg)', ->
     beforeEach ->
-      @coop.throwNewEgg()
-      @userInput.callback UserInput.LOWER_RIGHT
-      @coop.tick() for i in [0..4]
+      @getNewEggBroken()
 
     it 'updates missed points', ->
       expect(@scorer.addMiss).toHaveBeenCalledWith 1
@@ -91,9 +100,8 @@ describe 'The Chicken Coop', ->
 
   it 'fires right miss sequence when egg breaks on right', ->
     @randomizer.nextRandomLine = -> 1
-    @coop.throwNewEgg()
-    @userInput.callback UserInput.LOWER_LEFT
-    @coop.tick() for i in [0..4]
+
+    @getNewEggBroken()
 
     expect(@view.fireMissSequence).toHaveBeenCalled()
     expect(@view.fireMissSequence.mostRecentCall.args[0]).toEqual View.RIGHT
@@ -103,9 +111,15 @@ describe 'The Chicken Coop', ->
     gameOver = false
     @coop.onGameOver(-> gameOver = true)
 
-    @coop.throwNewEgg()
-    @userInput.callback UserInput.LOWER_RIGHT
-    @coop.tick() for i in [0..4]
+    @getNewEggBroken()
 
     expect(gameOver).toBeTruthy()
     expect(@view.fireGameOverSequence).toHaveBeenCalled()
+
+  it 'notifies when game should accelerate', ->
+    @scorer.shouldAccelerate = -> true
+    gotCalled = false
+    @coop.onAccelerate -> gotCalled = true
+
+    @getNewEggInBucket()
+    expect(gotCalled).toBeTruthy()

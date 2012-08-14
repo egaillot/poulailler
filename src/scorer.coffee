@@ -21,6 +21,9 @@ class @Scorer
     delete @levelThresholds[threshold]
     @levelThresholds[threshold] = level
 
+  shouldAccelerate: ->
+    @score % 10 == 0
+
   hasReachedNewLevel: ->
     @levelThresholds[@score] != undefined
 

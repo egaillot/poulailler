@@ -10,6 +10,8 @@ class @Coop
 
   onGameOver: (@gameOverCallback)->
 
+  onAccelerate: (@accelerateCallback)->
+
   throwNewEgg: ->
     @eggsPresent.unshift(new Egg(@randomizer.nextRandomLine(), @view))
 
@@ -24,6 +26,7 @@ class @Coop
 
   handleEggCaught: ->
     @scorer.addPoint()
+    @accelerateCallback() if @scorer.shouldAccelerate()
     @newLevelCallback(@scorer.levelReached()) if @scorer.hasReachedNewLevel()
     @throwNewEgg()
 

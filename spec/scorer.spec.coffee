@@ -33,6 +33,14 @@ describe "A scorer", ->
     @scorer.addMiss 1
     expect(@scorer.gameOver()).toBeTruthy()
 
+  it "tells when to accelerate", ->
+    @scorer.score = 39
+    expect(@scorer.shouldAccelerate()).toBeFalsy()
+    @scorer.score = 40
+    expect(@scorer.shouldAccelerate()).toBeTruthy()
+    @scorer.score = 50
+    expect(@scorer.shouldAccelerate()).toBeTruthy()
+
   describe "tells which level we've reached", ->
     beforeEach ->
       @scorer.changeLevelThreshold 2, 18

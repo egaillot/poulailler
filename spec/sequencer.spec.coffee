@@ -2,6 +2,7 @@ describe 'The Sequencer', ->
   describe 'makes the Chicken Coop throw more eggs at once', ->
     beforeEach ->
       @coop =
+        onAccelerate: ->
         onReachingNewLevel: ->
         onGameOver: ->
         throwNewEgg: jasmine.createSpy 'throwNewEgg'
