@@ -36,6 +36,7 @@ class @Coop
     @view.fireMissSequence side, =>
       if @scorer.gameOver()
         @gameOverCallback()
+        @view.fireGameOverSequence()
       else
         @inMissSequence = false
         @throwNewEgg()

@@ -18,6 +18,7 @@
     </div>
     <div>Score: <span class="score">42</span></div>
     <div>Miss: <span class="miss">99</span></div>
+    <div class="game-over" style="display: none;">Game Over!</div>
 
     <script type="text/coffeescript">
       view = new View
@@ -32,6 +33,7 @@
         
         view.displayScore 4807
         view.displayMiss 66
+        view.fireGameOverSequence()
       , 1000
     </script>
   </body>

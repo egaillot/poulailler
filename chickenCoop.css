@@ -176,3 +176,13 @@
   top: 170px;
   left: 250px;
 }
+
+.game-over {
+  color: white;
+  background: black;
+  border: solid 1px;
+  padding: 10px;
+  width: 80px;
+  text-align: center;
+  margin: 94px 104px;
+}

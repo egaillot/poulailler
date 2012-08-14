@@ -5,6 +5,7 @@ describe 'The Chicken Coop', ->
       eraseEgg: ->
       displayBucket: ->
       eraseBucket: ->
+      fireGameOverSequence: jasmine.createSpy 'fireGameOverSequence'
       fireMissSequence: jasmine.createSpy('fireMissSequence')
                                .andCallFake (side, callback)-> callback()
 
@@ -107,3 +108,4 @@ describe 'The Chicken Coop', ->
     @coop.tick() for i in [0..4]
 
     expect(gameOver).toBeTruthy()
+    expect(@view.fireGameOverSequence).toHaveBeenCalled()

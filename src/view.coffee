@@ -45,5 +45,8 @@ class @View
     sequence = '.left-sequence' if side == LEFT
     animateSequence $(sequence), 500, callback
 
+  fireGameOverSequence: ->
+    $('.game-over').show()
+
 @View.LEFT = LEFT
 @View.RIGHT = RIGHT
