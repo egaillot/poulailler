@@ -24,6 +24,7 @@ describe 'The Chicken Coop', ->
       hasReachedNewLevel: jasmine.createSpy('hasReachedNewLevel').andReturn false
       gameOver: -> false
       shouldAccelerate: -> false
+      shouldSlowDown: -> false
 
     @coop = new Coop @scorer, @randomizer, @view, @userInput
 
@@ -120,6 +121,14 @@ describe 'The Chicken Coop', ->
     @scorer.shouldAccelerate = -> true
     gotCalled = false
     @coop.onAccelerate -> gotCalled = true
+
+    @getNewEggInBucket()
+    expect(gotCalled).toBeTruthy()
+
+  it 'notifies when game should slow down', ->
+    @scorer.shouldSlowDown = -> true
+    gotCalled = false
+    @coop.onSlowDown -> gotCalled = true
 
     @getNewEggInBucket()
     expect(gotCalled).toBeTruthy()

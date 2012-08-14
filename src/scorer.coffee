@@ -22,7 +22,10 @@ class @Scorer
     @levelThresholds[threshold] = level
 
   shouldAccelerate: ->
-    @score % 10 == 0
+    @score % 10 == 0 && !@shouldSlowDown()
+
+  shouldSlowDown: ->
+    @score % 100 == 0
 
   hasReachedNewLevel: ->
     @levelThresholds[@score] != undefined

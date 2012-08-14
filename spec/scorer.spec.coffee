@@ -33,13 +33,26 @@ describe "A scorer", ->
     @scorer.addMiss 1
     expect(@scorer.gameOver()).toBeTruthy()
 
-  it "tells when to accelerate", ->
+  it "tells to slow down every 100 points", ->
+    @scorer.score = 99
+    expect(@scorer.shouldSlowDown()).toBeFalsy()
+    @scorer.score = 100
+    expect(@scorer.shouldSlowDown()).toBeTruthy()
+    @scorer.score = 200
+    expect(@scorer.shouldSlowDown()).toBeTruthy()
+
+  it "tells to accelerate every 10 points, except when it tells to slow down", ->
     @scorer.score = 39
     expect(@scorer.shouldAccelerate()).toBeFalsy()
     @scorer.score = 40
     expect(@scorer.shouldAccelerate()).toBeTruthy()
     @scorer.score = 50
     expect(@scorer.shouldAccelerate()).toBeTruthy()
+    @scorer.score = 100
+    expect(@scorer.shouldAccelerate()).toBeFalsy()
+
+
+
 
   describe "tells which level we've reached", ->
     beforeEach ->
