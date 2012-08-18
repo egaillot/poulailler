@@ -109,12 +109,12 @@ describe 'The Chicken Coop', ->
 
   it 'notifies when game is over', ->
     @scorer.gameOver = -> true
-    gameOver = false
-    @coop.onGameOver(-> gameOver = true)
+    gotCalled = false
+    @coop.onStopTicking -> gotCalled = true
 
     @getNewEggBroken()
 
-    expect(gameOver).toBeTruthy()
+    expect(gotCalled).toBeTruthy()
     expect(@view.fireGameOverSequence).toHaveBeenCalled()
 
   it 'notifies when game should accelerate', ->
@@ -132,3 +132,13 @@ describe 'The Chicken Coop', ->
 
     @getNewEggInBucket()
     expect(gotCalled).toBeTruthy()
+
+  it 'notifies when to stop / resume ticking', ->
+    stopGotCalled = false
+    resumeGotCalled = false
+    @coop.onStopTicking -> stopGotCalled = true
+    @coop.onResumeTicking -> resumeGotCalled = true
+
+    @getNewEggBroken()
+    expect(stopGotCalled).toBeTruthy()
+    expect(resumeGotCalled).toBeTruthy()

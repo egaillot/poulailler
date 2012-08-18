@@ -1,25 +1,23 @@
 class @Coop
   constructor: (@scorer, @randomizer, @view, @userInput)->
     @newLevelCallback = ->
-    @gameOverCallback = ->
-    @inMissSequence = false
+    @accelerateCallback = ->
+    @slowDownCallback = ->
+    @stopTickingCallback = ->
+    @resumeTickingCallback = ->
     @bucket = new Bucket @view, @userInput
     @eggsPresent = []
 
   onReachingNewLevel: (@newLevelCallback)->
-
-  onGameOver: (@gameOverCallback)->
-
   onAccelerate: (@accelerateCallback)->
-
   onSlowDown: (@slowDownCallback)->
-
+  onStopTicking: (@stopTickingCallback)->
+  onResumeTicking: (@resumeTickingCallback)->
 
   throwNewEgg: ->
     @eggsPresent.unshift(new Egg(@randomizer.nextRandomLine(), @view))
 
   tick: ->
-    return if @inMissSequence
     egg = @eggsPresent.pop()
     if egg.aboutToFall() then @handleFallingEgg(egg) else @handleMovingEgg(egg)
 
@@ -40,12 +38,13 @@ class @Coop
     @fireMissSequence(egg.side())
 
   fireMissSequence: (side)->
+    @stopTickingCallback()
     @view.fireMissSequence side, =>
       if @scorer.gameOver()
-        @gameOverCallback()
+        @stopTickingCallback()
         @view.fireGameOverSequence()
       else
-        @inMissSequence = false
+        @resumeTickingCallback()
         @throwNewEgg()
 
   handleMovingEgg: (egg)->

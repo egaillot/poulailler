@@ -5,7 +5,8 @@ describe 'The Sequencer', ->
         onAccelerate: ->
         onSlowDown: ->
         onReachingNewLevel: ->
-        onGameOver: ->
+        onStopTicking: ->
+        onResumeTicking: ->
         throwNewEgg: jasmine.createSpy 'throwNewEgg'
       @sequencer = new Sequencer 100, @coop
 

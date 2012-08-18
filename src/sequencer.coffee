@@ -10,7 +10,10 @@ class @Sequencer
     @coop.onAccelerate => @tickDuration -= 5
     @coop.onSlowDown => @tickDuration += 15
     @coop.onReachingNewLevel (levelReached)=> @handleNewLevelReached(levelReached)
-    @coop.onGameOver => @gameOver = true
+    @coop.onStopTicking => @stopTicking = true
+    @coop.onResumeTicking => 
+      @stopTicking = false
+      @fireNextTick()
 
   handleNewLevelReached: (levelReached)->
     ticks = TICKS_BEFORE_THROWING_NEW_EGG[levelReached]
@@ -20,12 +23,12 @@ class @Sequencer
     , ticks * @tickDuration
 
   init: ->
-    @gameOver = false
+    @stopTicking = false
     @coop.throwNewEgg()
     @fireNextTick()
 
   fireNextTick: ->
-    return if @gameOver
+    return if @stopTicking
     setTimeout =>
       @coop.tick()
       @fireNextTick()
