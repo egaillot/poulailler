@@ -13,4 +13,4 @@ class @Game
     @sequencer = new Sequencer 500, coop
 
   init: ->
-    @sequencer.init()
+    @sequencer.start()

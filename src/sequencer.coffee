@@ -1,35 +1,49 @@
-TICKS_BEFORE_THROWING_NEW_EGG = 
-  2: 2.5
-  3: 4
-  4: 1
-  5: 3
-  6: 2
+ADDITIONAL_EGG_POSITION =
+  2: 2
+  3: 2
+  4: 7
+  5: 2
+  6: 12
 
 class @Sequencer
   constructor: (@tickDuration, @coop)->
     @coop.onAccelerate => @tickDuration -= 5
     @coop.onSlowDown => @tickDuration += 15
     @coop.onReachingNewLevel (levelReached)=> @handleNewLevelReached(levelReached)
-    @coop.onStopTicking => @stopTicking = true
-    @coop.onResumeTicking => 
-      @stopTicking = false
-      @fireNextTick()
+    @coop.onStopTicking => @stop()
+    @coop.onResumeTicking => @resume()
 
   handleNewLevelReached: (levelReached)->
-    ticks = TICKS_BEFORE_THROWING_NEW_EGG[levelReached]
-    setTimeout =>
-      @coop.throwNewEgg()
-      @tickDuration /= 2 if levelReached == 2
-    , ticks * @tickDuration
+    @additionalEggPosition = ADDITIONAL_EGG_POSITION[levelReached]
+    if levelReached == 2
+      setTimeout (=> @tickDuration /= 2), @additionalEggPosition * @tickDuration - 10
 
-  init: ->
+  start: ->
+    @fullCycle = Egg.ABOUT_TO_FALL_POSITION + 1
+    @positionInCycle = 0
+    @additionalEggPosition = -1
+
     @stopTicking = false
     @coop.throwNewEgg()
+    @fireNextTick()
+
+  stop: ->
+    @stopTicking = true
+
+  resume: ->
+    @stopTicking = false
     @fireNextTick()
 
   fireNextTick: ->
     return if @stopTicking
     setTimeout =>
-      @coop.tick()
+      if @additionalEggPosition == @positionInCycle
+        @additionalEggPosition = -1
+        @positionInCycle = 0
+        @fullCycle += Egg.ABOUT_TO_FALL_POSITION + 1
+        @coop.throwNewEgg()
+      else
+        @coop.tick()
+        @positionInCycle = (@positionInCycle + 1) % @fullCycle
       @fireNextTick()
     , @tickDuration

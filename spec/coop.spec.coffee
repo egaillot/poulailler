@@ -53,7 +53,7 @@ describe 'The Chicken Coop', ->
   it 'keeps count of how many eggs have fallen', ->
     @coop.throwNewEgg()
     @coop.tick() for i in [0..3]
-    expect(@scorer.addPoint).wasNotCalled()
+    expect(@scorer.addPoint).not.toHaveBeenCalled()
     @coop.tick()
     expect(@scorer.addPoint).toHaveBeenCalled()
 
@@ -87,10 +87,10 @@ describe 'The Chicken Coop', ->
       expect(@scorer.addMiss).toHaveBeenCalledWith 1
 
     it 'does not add point', ->
-      expect(@scorer.addPoint).wasNotCalled()
+      expect(@scorer.addPoint).not.toHaveBeenCalled()
 
     it 'does not check whether a new level has been reached', ->
-      expect(@scorer.hasReachedNewLevel).wasNotCalled()
+      expect(@scorer.hasReachedNewLevel).not.toHaveBeenCalled()
 
     it 'gets into miss sequence', ->
       expect(@view.fireMissSequence).toHaveBeenCalled()
