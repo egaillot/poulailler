@@ -55,19 +55,19 @@ class @Sequencer
       @positionInCycle = (@positionInCycle + 1) % @fullCycle
 
   hideMinnie: ->
-    if @stopTicking
-      @minnieCycleRunning = false
-      return 
-
-    @coop.hideMinnie()
-    setTimeout => 
-      @showMinnie()
-    , 4000
+    @handleTwoNextActionsInMinnieCycle (=> @coop.hideMinnie()), 4000, (=> @showMinnie())
 
   showMinnie: ->
+    @handleTwoNextActionsInMinnieCycle (=> @coop.showMinnie()), 2000, (=> @hideMinnie())
+
+
+  handleTwoNextActionsInMinnieCycle: (immediateCallback, delay, delayedCallback)->
     if @stopTicking
       @minnieCycleRunning = false
       return 
 
-    @coop.showMinnie()
-    setTimeout (=> @hideMinnie()), 2000
+    immediateCallback()
+    setTimeout -> 
+      delayedCallback()
+    , delay
+    
