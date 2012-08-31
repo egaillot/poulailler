@@ -137,12 +137,16 @@ describe 'The Chicken Coop', ->
 
   it 'notifies when to stop / resume ticking', ->
     stopGotCalled = false
+    otherStopGotCalled = false
     resumeGotCalled = false
+    otherResumeGotCalled = false
     @coop.onStopTicking -> stopGotCalled = true
+    @coop.onStopTicking -> otherStopGotCalled = true
     @coop.onResumeTicking -> resumeGotCalled = true
 
     @getNewEggBroken()
     expect(stopGotCalled).toBeTruthy()
+    expect(otherStopGotCalled).toBeTruthy()
     expect(resumeGotCalled).toBeTruthy()
 
   it 'asks view to display Minnie', ->

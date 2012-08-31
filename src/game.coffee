@@ -10,7 +10,9 @@ class @Game
         return @cpt = 0
 
     coop = new Coop scorer, randomizer, view, userInput
-    @sequencer = new Sequencer 500, coop
+    @coopSequencer = new CoopSequencer 500, coop
+    @minnieSequencer = new MinnieSequencer coop
 
   init: ->
-    @sequencer.start()
+    @coopSequencer.start()
+    @minnieSequencer.start()
