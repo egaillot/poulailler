@@ -5,6 +5,7 @@ class @Coop
     @slowDownCallback = ->
     @stopTickingCallbacks = []
     @resumeTickingCallbacks = []
+    @minnieDisplayed = false
     @bucket = new Bucket @view, @userInput
     @eggsPresent = []
 
@@ -34,7 +35,9 @@ class @Coop
 
   handleEggMissed: (egg)->
     @inMissSequence = true
-    @scorer.addMiss 1
+    missedPoints = 1
+    missedPoints = 2 unless @minnieDisplayed
+    @scorer.addMiss missedPoints
     @fireMissSequence(egg.side())
 
   fireMissSequence: (side)->
@@ -51,7 +54,9 @@ class @Coop
     @eggsPresent.unshift(egg)
 
   showMinnie: ->
+    @minnieDisplayed = true
     @view.displayMinnie()
 
   hideMinnie: ->
+    @minnieDisplayed = false
     @view.eraseMinnie()

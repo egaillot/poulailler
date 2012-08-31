@@ -85,8 +85,8 @@ describe 'The Chicken Coop', ->
     beforeEach ->
       @getNewEggBroken()
 
-    it 'updates missed points', ->
-      expect(@scorer.addMiss).toHaveBeenCalledWith 1
+    it 'adds 2 missed points when Minnie is not displayed', ->
+      expect(@scorer.addMiss).toHaveBeenCalledWith 2
 
     it 'does not add point', ->
       expect(@scorer.addPoint).not.toHaveBeenCalled()
@@ -98,7 +98,10 @@ describe 'The Chicken Coop', ->
       expect(@view.fireMissSequence).toHaveBeenCalled()
       expect(@view.fireMissSequence.mostRecentCall.args[0]).toEqual View.LEFT
 
-
+  it 'adds 1 missed point when egg brakes and Minnie is displayed', ->
+    @coop.showMinnie()
+    @getNewEggBroken()
+    expect(@scorer.addMiss).toHaveBeenCalledWith 1
 
 
   it 'fires right miss sequence when egg breaks on right', ->
