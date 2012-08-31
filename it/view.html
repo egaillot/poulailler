@@ -16,6 +16,7 @@
       <span class="bucket-0" style="display: none;">Left</span>
       <span class="bucket-1" style="display: none;">Right</span>
     </div>
+    <div class="minnie" style="display: none;">Minnie here!</div>
     <div>Score: <span class="score">42</span></div>
     <div>Miss: <span class="miss">99</span></div>
     <div class="game-over" style="display: none;">Game Over!</div>
@@ -24,6 +25,7 @@
       view = new View
       view.displayEgg 0, 0
       view.displayBucket 1
+      view.displayMinnie()
       setTimeout ->
         view.eraseEgg 0, 0
         view.displayEgg 1, 1
@@ -31,6 +33,8 @@
         view.eraseBucket 1
         view.displayBucket 0
         
+        view.eraseMinnie()
+
         view.displayScore 4807
         view.displayMiss 66
         view.fireGameOverSequence()

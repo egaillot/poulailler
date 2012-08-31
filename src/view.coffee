@@ -34,6 +34,12 @@ class @View
   eraseBucket: (position)->
     $(".bucket-#{position}").hide()
 
+  displayMinnie: ->
+    $('.minnie').show()
+
+  eraseMinnie: ->
+    $('.minnie').hide()
+
   displayScore: (score)->
     $('.score').text score
 

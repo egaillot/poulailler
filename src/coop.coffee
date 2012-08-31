@@ -50,3 +50,9 @@ class @Coop
   handleMovingEgg: (egg)->
     egg.move()
     @eggsPresent.unshift(egg)
+
+  showMinnie: ->
+    @view.displayMinnie()
+
+  hideMinnie: ->
+    @view.eraseMinnie()

@@ -23,9 +23,8 @@ class @Sequencer
     @positionInCycle = 0
     @additionalEggPosition = -1
 
-    @stopTicking = false
     @coop.throwNewEgg()
-    @fireNextTick()
+    @resume()
 
   stop: ->
     @stopTicking = true
@@ -34,16 +33,41 @@ class @Sequencer
     @stopTicking = false
     @fireNextTick()
 
+    unless @minnieCycleRunning
+      @minnieCycleRunning = true
+      @hideMinnie()
+
   fireNextTick: ->
     return if @stopTicking
     setTimeout =>
-      if @additionalEggPosition == @positionInCycle
-        @additionalEggPosition = -1
-        @positionInCycle = 0
-        @fullCycle += Egg.ABOUT_TO_FALL_POSITION + 1
-        @coop.throwNewEgg()
-      else
-        @coop.tick()
-        @positionInCycle = (@positionInCycle + 1) % @fullCycle
+      @moveInCycle()
       @fireNextTick()
     , @tickDuration
+
+  moveInCycle: ->
+    if @additionalEggPosition == @positionInCycle
+      @additionalEggPosition = -1
+      @positionInCycle = 0
+      @fullCycle += Egg.ABOUT_TO_FALL_POSITION + 1
+      @coop.throwNewEgg()
+    else
+      @coop.tick()
+      @positionInCycle = (@positionInCycle + 1) % @fullCycle
+
+  hideMinnie: ->
+    if @stopTicking
+      @minnieCycleRunning = false
+      return 
+
+    @coop.hideMinnie()
+    setTimeout => 
+      @showMinnie()
+    , 4000
+
+  showMinnie: ->
+    if @stopTicking
+      @minnieCycleRunning = false
+      return 
+
+    @coop.showMinnie()
+    setTimeout (=> @hideMinnie()), 2000

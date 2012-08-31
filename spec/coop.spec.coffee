@@ -5,6 +5,8 @@ describe 'The Chicken Coop', ->
       eraseEgg: ->
       displayBucket: ->
       eraseBucket: ->
+      displayMinnie: jasmine.createSpy 'displayMinnie'
+      eraseMinnie: jasmine.createSpy 'eraseMinnie'
       fireGameOverSequence: jasmine.createSpy 'fireGameOverSequence'
       fireMissSequence: jasmine.createSpy('fireMissSequence')
                                .andCallFake (side, callback)-> callback()
@@ -142,3 +144,12 @@ describe 'The Chicken Coop', ->
     @getNewEggBroken()
     expect(stopGotCalled).toBeTruthy()
     expect(resumeGotCalled).toBeTruthy()
+
+  it 'asks view to display Minnie', ->
+    @coop.showMinnie()
+    expect(@view.displayMinnie).toHaveBeenCalled()
+
+  it 'asks view to erase Minnie', ->
+    @coop.hideMinnie()
+    expect(@view.eraseMinnie).toHaveBeenCalled()
+
