@@ -1,19 +1,23 @@
-animateSequence = ($sequence, stepDuration, callback)->
-  blink = ($sprite)->
+animateSequence = (shouldAnimate, $sequence, stepDuration, callback)->
+  blink = ($sprite, duration)->
     $sprite.show()
-    setTimeout (-> $sprite.hide()), stepDuration
+    setTimeout (-> $sprite.hide()), duration
 
-  showNextElement = ($sequence)->
-    blink($sequence.eq 0);
-    animate($sequence[1..($sequence.length - 1)])
-
-  animate = ($sequence) ->
-    whatToDo = (-> showNextElement($sequence))
-    whatToDo = callback if ($sequence.length == 0) 
-    setTimeout whatToDo, stepDuration
+  showNextElement = ($sequence, duration)->
+    return if $sequence.length == 0
+    blink $sequence.eq(0), duration
+    setTimeout -> 
+      showNextElement $sequence[1..($sequence.length - 1)], duration
+    , duration
 
   return if ($sequence.length == 0)
-  showNextElement $sequence
+
+  sequenceDuration = stepDuration * $sequence.length
+  if shouldAnimate
+    showNextElement $sequence, stepDuration
+  else
+    showNextElement $sequence.eq(0), sequenceDuration
+  setTimeout callback, sequenceDuration
 
 
 
@@ -46,10 +50,10 @@ class @View
   displayMiss: (miss)->
     $('.miss').text miss
 
-  fireMissSequence: (side, callback)->
+  fireMissSequence: (side, shouldAnimate, callback)->
     sequence = '.right-sequence'
     sequence = '.left-sequence' if side == LEFT
-    animateSequence $(sequence), 500, callback
+    animateSequence shouldAnimate, $(sequence), 500, callback
 
   fireGameOverSequence: ->
     $('.game-over').show()

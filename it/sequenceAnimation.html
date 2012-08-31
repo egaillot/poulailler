@@ -16,10 +16,12 @@
 
     <script type="text/coffeescript">
       view = new View
-      view.fireMissSequence View.LEFT, -> 
+      view.fireMissSequence View.LEFT, true, -> 
         console.log 'Animated left sequence'
-        view.fireMissSequence View.RIGHT, ->
-          console.log 'Animated right sequence'
+        view.fireMissSequence View.LEFT, false, ->
+          console.log '… then non-animated left sequence'
+          view.fireMissSequence View.RIGHT, true, ->
+            console.log '… then animated right sequence'
     </script>
   </body>
 </html>

@@ -38,11 +38,11 @@ class @Coop
     missedPoints = 1
     missedPoints = 2 unless @minnieDisplayed
     @scorer.addMiss missedPoints
-    @fireMissSequence(egg.side())
+    @fireMissSequence(egg.side(), @minnieDisplayed)
 
-  fireMissSequence: (side)->
+  fireMissSequence: (side, shouldAnimate)->
     callback() for callback in @stopTickingCallbacks
-    @view.fireMissSequence side, =>
+    @view.fireMissSequence side, shouldAnimate, =>
       if @scorer.gameOver()
         @view.fireGameOverSequence()
       else

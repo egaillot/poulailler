@@ -9,7 +9,7 @@ describe 'The Chicken Coop', ->
       eraseMinnie: jasmine.createSpy 'eraseMinnie'
       fireGameOverSequence: jasmine.createSpy 'fireGameOverSequence'
       fireMissSequence: jasmine.createSpy('fireMissSequence')
-                               .andCallFake (side, callback)-> callback()
+                               .andCallFake (side, shouldAnimate, callback)-> callback()
 
 
     @userInput =
@@ -81,8 +81,9 @@ describe 'The Chicken Coop', ->
 
 
 
-  describe '(when bucket not under falling egg)', ->
+  describe '(when bucket not under falling egg and Minnie not displayed)', ->
     beforeEach ->
+      @coop.hideMinnie()
       @getNewEggBroken()
 
     it 'adds 2 missed points when Minnie is not displayed', ->
@@ -94,14 +95,24 @@ describe 'The Chicken Coop', ->
     it 'does not check whether a new level has been reached', ->
       expect(@scorer.hasReachedNewLevel).not.toHaveBeenCalled()
 
-    it 'gets into miss sequence', ->
+    it 'fires non-animated miss sequence', ->
       expect(@view.fireMissSequence).toHaveBeenCalled()
       expect(@view.fireMissSequence.mostRecentCall.args[0]).toEqual View.LEFT
+      expect(@view.fireMissSequence.mostRecentCall.args[1]).toEqual false
 
-  it 'adds 1 missed point when egg brakes and Minnie is displayed', ->
-    @coop.showMinnie()
-    @getNewEggBroken()
-    expect(@scorer.addMiss).toHaveBeenCalledWith 1
+
+
+  describe '(when bucket not under falling egg and Minnie displayed)', ->
+    beforeEach ->
+      @coop.showMinnie()
+      @getNewEggBroken()
+
+    it 'adds 1 missed point when egg brakes and Minnie is displayed', ->
+      expect(@scorer.addMiss).toHaveBeenCalledWith 1
+
+    it 'fires animated miss sequence', ->
+      expect(@view.fireMissSequence).toHaveBeenCalled()
+      expect(@view.fireMissSequence.mostRecentCall.args[1]).toEqual true
 
 
   it 'fires right miss sequence when egg breaks on right', ->
