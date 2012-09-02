@@ -31,6 +31,9 @@ describe 'The Chicken Coop', ->
                                .andCallFake (side, shouldAnimate, callback)-> callback()
 
 
+    @soundSystem =
+      playGotIt: jasmine.createSpy 'playGotIt'
+
     @userInput =
       onBucketPositionChange: (@callback)->
 
@@ -47,7 +50,7 @@ describe 'The Chicken Coop', ->
       shouldAccelerate: -> false
       shouldSlowDown: -> false
 
-    @coop = new Coop @scorer, @randomizer, @view, @userInput
+    @coop = new Coop @scorer, @randomizer, @view, @soundSystem, @userInput
 
     @getNewEggInBucket = =>
       @coop.throwNewEgg()
@@ -97,6 +100,9 @@ describe 'The Chicken Coop', ->
       expect(@coop.eggsPresent.length).toEqual 1
       expect(@coop.eggsPresent[0].position).toEqual 0
       expect(@coop.eggsPresent[0].line).toEqual 1
+
+    it 'plays a "got it" beep', ->
+      expect(@soundSystem.playGotIt).toHaveBeenCalled()
 
 
 

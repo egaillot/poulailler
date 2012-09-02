@@ -20,12 +20,13 @@
 class @Game
   constructor: ->
     userInput = new UserInput
+    sound = new SoundSystem
     view = new View
-    scorer = new Scorer view
 
+    scorer = new Scorer view
     randomizer = new Randomizer
 
-    coop = new Coop scorer, randomizer, view, userInput
+    coop = new Coop scorer, randomizer, view, sound, userInput
     @coopSequencer = new CoopSequencer 500, coop
     @minnieSequencer = new MinnieSequencer coop
 

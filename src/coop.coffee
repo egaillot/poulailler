@@ -18,7 +18,7 @@
 
 
 class @Coop
-  constructor: (@scorer, @randomizer, @view, @userInput)->
+  constructor: (@scorer, @randomizer, @view, @soundSystem, @userInput)->
     @newLevelCallback = ->
     @accelerateCallback = ->
     @slowDownCallback = ->
@@ -46,6 +46,7 @@ class @Coop
     if egg.line == @bucket.position then @handleEggCaught() else @handleEggMissed egg
 
   handleEggCaught: ->
+    @soundSystem.playGotIt()
     @scorer.addPoint()
     @accelerateCallback() if @scorer.shouldAccelerate()
     @slowDownCallback() if @scorer.shouldSlowDown()
