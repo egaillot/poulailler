@@ -23,10 +23,7 @@ class @Game
     view = new View
     scorer = new Scorer view
 
-    randomizer =
-      nextRandomLine: ->
-        return @cpt = (@cpt + 1) % 4 unless @cpt == undefined
-        return @cpt = 0
+    randomizer = new Randomizer
 
     coop = new Coop scorer, randomizer, view, userInput
     @coopSequencer = new CoopSequencer 500, coop
