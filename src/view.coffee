@@ -18,7 +18,14 @@
 
 
 animateSequence = (shouldAnimate, $sequence, stepDuration, callback)->
+  playSound = ($sprite)->
+    sound = $sprite.find('audio')
+    return if sound.length == 0
+    sound[0].play()
+
+
   blink = ($sprite, duration)->
+    playSound $sprite
     $sprite.show()
     setTimeout (-> $sprite.hide()), duration
 

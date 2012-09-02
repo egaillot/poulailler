@@ -24,6 +24,7 @@ along with Poulailler.  If not, see <http://www.gnu.org/licenses/>.
   <head>
     <script src="../lib/jquery-1.7.2.js"></script>
     <script src="../lib/coffee-script.js"></script>
+    <script type="text/coffeescript" src="../src/soundSystem.coffee"></script>
     <script type="text/coffeescript" src="../src/view.coffee"></script>
   </head>
   <body style="position: relative">
@@ -31,9 +32,18 @@ along with Poulailler.  If not, see <http://www.gnu.org/licenses/>.
     <div id="item2" class="left-sequence" style="position: absolute; top: 60px; display: none;">0</div>
     <div id="item3" class="left-sequence" style="position: absolute; top: 70px; display: none;">0</div>
 
-    <div id="item4" class="right-sequence" style="position: absolute; top: 50px; left: 20px; display: none;">1</div>
-    <div id="item5" class="right-sequence" style="position: absolute; top: 60px; left: 20px; display: none;">1</div>
-    <div id="item6" class="right-sequence" style="position: absolute; top: 70px; left: 20px; display: none;">1</div>
+    <div id="item4" class="right-sequence" style="position: absolute; top: 50px; left: 20px; display: none;">
+      <audio src="../resources/sounds/crash.wav" class="crash" preload="auto"></audio>
+      1
+    </div>
+    <div id="item5" class="right-sequence" style="position: absolute; top: 60px; left: 20px; display: none;">
+      <audio src="../resources/sounds/bye.wav" class="bye" preload="auto"></audio>
+      1
+    </div>
+    <div id="item6" class="right-sequence" style="position: absolute; top: 70px; left: 20px; display: none;">
+      <audio src="../resources/sounds/bye.wav" class="bye" preload="auto"></audio>
+      1
+    </div>
 
     <script type="text/coffeescript">
       view = new View
@@ -42,7 +52,7 @@ along with Poulailler.  If not, see <http://www.gnu.org/licenses/>.
         view.fireMissSequence View.LEFT, false, ->
           console.log '… then non-animated left sequence'
           view.fireMissSequence View.RIGHT, true, ->
-            console.log '… then animated right sequence'
+            console.log '… then animated right sequence, with sound'
     </script>
   </body>
 </html>
