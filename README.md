@@ -43,5 +43,5 @@ called Mickey Mouse.  I wanted to see if I was capable of programming it
 in JavaScript.  Then I figured out it might be useful to others to see
 how I did it.  In such, this project is meant for educational purpose only.
 
-Most of what I know in JavaScript and CoffeeScript, I know from Jonathan
-Perret.  Thank you, Jonathan.
+Most of what I know in JavaScript and CoffeeScript, I know from [Jonathan
+Perret](https://github.com/jonathanperret).  Thank you, Jonathan.
