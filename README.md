@@ -18,6 +18,9 @@ you will get only one missed point.  When she is not, you
 will get two missed points.  The game is over when you have
 six or more missed points.
 
+You should not need to download additional libraries.  All 
+dependencies are included in the `lib` directory of the 
+project.
 
 License
 =======
@@ -42,6 +45,10 @@ The game mechanics are directly inspired by Nintendo's Game & Watch
 called Mickey Mouse.  I wanted to see if I was capable of programming it
 in JavaScript.  Then I figured out it might be useful to others to see
 how I did it.  In such, this project is meant for educational purpose only.
+
+The program is written in [CoffeeScript](http://coffeescript.org), HTML 
+and CSS. It uses [jQuery](http://jquery.com).  Tests are writen using the 
+[Jasmine framework](http://pivotal.github.com/jasmine).
 
 Most of what I know in JavaScript and CoffeeScript, I know from [Jonathan
 Perret](https://github.com/jonathanperret).  Thank you, Jonathan.
