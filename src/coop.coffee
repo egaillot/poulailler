@@ -35,11 +35,11 @@ class @Coop
   onResumeTicking: (callback)-> @resumeTickingCallbacks.push callback
 
   throwNewEgg: ->
-    @eggsPresent.unshift(new Egg(@randomizer.nextRandomLine(), @view))
+    @eggsPresent.unshift new Egg(@randomizer.nextRandomLine(), @view, @soundSystem)
 
   tick: ->
     egg = @eggsPresent.pop()
-    if egg.aboutToFall() then @handleFallingEgg(egg) else @handleMovingEgg(egg)
+    if egg.aboutToFall() then @handleFallingEgg egg else @handleMovingEgg egg
 
   handleFallingEgg: (egg)->
     egg.hide()
@@ -50,7 +50,7 @@ class @Coop
     @scorer.addPoint()
     @accelerateCallback() if @scorer.shouldAccelerate()
     @slowDownCallback() if @scorer.shouldSlowDown()
-    @newLevelCallback(@scorer.levelReached()) if @scorer.hasReachedNewLevel()
+    @newLevelCallback @scorer.levelReached() if @scorer.hasReachedNewLevel()
     @throwNewEgg()
 
   handleEggMissed: (egg)->
@@ -58,7 +58,7 @@ class @Coop
     missedPoints = 1
     missedPoints = 2 unless @minnieDisplayed
     @scorer.addMiss missedPoints
-    @fireMissSequence(egg.side(), @minnieDisplayed)
+    @fireMissSequence egg.side(), @minnieDisplayed
 
   fireMissSequence: (side, shouldAnimate)->
     callback() for callback in @stopTickingCallbacks
@@ -71,7 +71,7 @@ class @Coop
 
   handleMovingEgg: (egg)->
     egg.move()
-    @eggsPresent.unshift(egg)
+    @eggsPresent.unshift egg
 
   showMinnie: ->
     @minnieDisplayed = true

@@ -24,24 +24,28 @@ describe "An egg", ->
       displayEgg: jasmine.createSpy 'displayEgg'
       eraseEgg: jasmine.createSpy 'eraseEgg'
 
-  it "can display itself", ->
-    egg = new Egg 42, @view
+    @sound =
+      playEggLineBeep: jasmine.createSpy 'playEggLineBeep'
+
+  it "can be seen and heard", ->
+    egg = new Egg 42, @view, @sound
     expect(@view.displayEgg).toHaveBeenCalledWith 42, 0
+    expect(@sound.playEggLineBeep).toHaveBeenCalledWith 42
 
   it "can move", ->
-    egg = new Egg 0, @view
+    egg = new Egg 0, @view, @sound
     expect(egg.position).toEqual 0
     egg.move()
     expect(egg.position).toEqual 1
 
   it "can hide itself", ->
-    egg = new Egg 4807, @view
+    egg = new Egg 4807, @view, @sound
     egg.move()
     expect(@view.eraseEgg).toHaveBeenCalledWith 4807, 0
     expect(@view.displayEgg).toHaveBeenCalledWith 4807, 1
 
   it "knows when it is about to fall", ->
-    egg = new Egg 0, @view
+    egg = new Egg 0, @view, @sound
     egg.position = 3
     expect(egg.aboutToFall()).toBeFalsy()
     egg.position = 4
@@ -50,7 +54,7 @@ describe "An egg", ->
   describe "knows on which side it lies", ->
     beforeEach ->
       @expectSide = (expectedSide, eggLine)=>
-        egg = new Egg eggLine, @view
+        egg = new Egg eggLine, @view, @sound
         expect(egg.side()).toEqual expectedSide
 
     it "on line 0", ->

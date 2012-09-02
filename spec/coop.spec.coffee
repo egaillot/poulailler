@@ -32,6 +32,7 @@ describe 'The Chicken Coop', ->
 
 
     @soundSystem =
+      playEggLineBeep: ->
       playGotIt: jasmine.createSpy 'playGotIt'
 
     @userInput =

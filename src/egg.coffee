@@ -21,7 +21,7 @@ EGG_ABOUT_TO_FALL_POSITION = 4
 
 class @Egg
 
-  constructor: (@line, @view)->
+  constructor: (@line, @view, @sound)->
     @position = 0
     @show()
 
@@ -32,6 +32,7 @@ class @Egg
 
   show: ->
     @view.displayEgg @line, @position
+    @sound.playEggLineBeep @line
 
   hide: ->
     @view.eraseEgg @line, @position

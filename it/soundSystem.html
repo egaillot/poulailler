@@ -27,10 +27,18 @@ along with Poulailler.  If not, see <http://www.gnu.org/licenses/>.
     <script type="text/coffeescript" src="../src/soundSystem.coffee"></script>
   </head>
   <body>
+    <audio src="../resources/sounds/0.wav" class="line-beep-0" preload="auto"></audio>
+    <audio src="../resources/sounds/1.wav" class="line-beep-1" preload="auto"></audio>
+    <audio src="../resources/sounds/2.wav" class="line-beep-2" preload="auto"></audio>
+    <audio src="../resources/sounds/3.wav" class="line-beep-3" preload="auto"></audio>
     <audio src="../resources/sounds/gotIt.wav" class="got-it" preload="auto"></audio>
     <script type="text/coffeescript">
       soundSystem = new SoundSystem
       soundSystem.playGotIt()
+      setTimeout (-> soundSystem.playEggLineBeep 0), 500
+      setTimeout (-> soundSystem.playEggLineBeep 1), 1000
+      setTimeout (-> soundSystem.playEggLineBeep 2), 1500
+      setTimeout (-> soundSystem.playEggLineBeep 3), 2000
     </script>
   </body>
 </html>
