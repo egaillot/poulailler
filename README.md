@@ -1,5 +1,7 @@
-Poulailler - This is a browser-revival of Nintendo's 
+This is a browser-revival of Nintendo's 
 famous Game & Watch Mickey Mouse.
+
+Copyright 2012 Emmanuel Gaillot (emmanuel.gaillot@gmail.com)
 
 How to play
 ===========
@@ -15,3 +17,31 @@ penalties for that.  When Minnie is displayed on screen,
 you will get only one missed point.  When she is not, you
 will get two missed points.  The game is over when you have
 six or more missed points.
+
+
+License
+=======
+
+Poulailler is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+Poulailler is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with Poulailler.  If not, see <http://www.gnu.org/licenses/>.
+
+Acknowledgements
+================
+
+The game mechanics are directly inspired by Nintendo's Game & Watch
+called Mickey Mouse.  I wanted to see if I was capable of programming it
+in JavaScript.  Then I figured out it might be useful to others to see
+how I did it.  In such, this project is meant for educational purpose only.
+
+Most of what I know in JavaScript and CoffeeScript, I know from Jonathan
+Perret.  Thank you, Jonathan.
