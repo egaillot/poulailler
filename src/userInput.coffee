@@ -29,6 +29,8 @@ class @UserInput
 
   keyPressed: (event)->
     key = event.keyCode
+    if key == 0
+      key = event.charCode
     if key in [UPPER_LEFT, LOWER_LEFT, UPPER_RIGHT, LOWER_RIGHT]
       @callback key
 
