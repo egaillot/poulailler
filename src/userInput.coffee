@@ -28,7 +28,7 @@ class @UserInput
     $('body').keypress((event) => @keyPressed(event))
 
   keyPressed: (event)->
-    key = event.keyCode
+    key = event.charCode
     if key in [UPPER_LEFT, LOWER_LEFT, UPPER_RIGHT, LOWER_RIGHT]
       @callback key
 
