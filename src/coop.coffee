@@ -18,7 +18,7 @@
 
 
 class @Coop
-  constructor: (@bucket, @scorer, @randomizer, @view, @soundSystem, @userInput)->
+  constructor: (@bucket, @scorer, @randomizer, @view, @soundSystem)->
     @newLevelCallback = ->
     @accelerateCallback = ->
     @slowDownCallback = ->

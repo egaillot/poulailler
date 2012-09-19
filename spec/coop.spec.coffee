@@ -51,9 +51,9 @@ describe 'The Chicken Coop', ->
       shouldAccelerate: -> false
       shouldSlowDown: -> false
 
-    @bucket = new Bucket @view, @userInput
+    @bucket = { position: 0 }
 
-    @coop = new Coop @bucket, @scorer, @randomizer, @view, @soundSystem, @userInput
+    @coop = new Coop @bucket, @scorer, @randomizer, @view, @soundSystem
 
     @getNewEggInBucket = =>
       @coop.throwNewEgg()
@@ -61,7 +61,7 @@ describe 'The Chicken Coop', ->
 
     @getNewEggBroken = =>
       @coop.throwNewEgg()
-      @userInput.callback UserInput.LOWER_RIGHT
+      @bucket.position = 3
       @coop.tick() for i in [0..4]
 
 

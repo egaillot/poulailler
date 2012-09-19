@@ -23,12 +23,12 @@ class @Game
     sound = new SoundSystem
     view = new View
 
+    bucket = new Bucket view, userInput
+
     scorer = new Scorer view
     randomizer = new Randomizer
 
-    bucket = new Bucket view, userInput
-
-    coop = new Coop bucket, scorer, randomizer, view, sound, userInput
+    coop = new Coop bucket, scorer, randomizer, view, sound
     @coopSequencer = new CoopSequencer 500, coop
     @minnieSequencer = new MinnieSequencer coop
 
