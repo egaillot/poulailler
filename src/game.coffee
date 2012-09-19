@@ -26,7 +26,9 @@ class @Game
     scorer = new Scorer view
     randomizer = new Randomizer
 
-    coop = new Coop scorer, randomizer, view, sound, userInput
+    bucket = new Bucket view, userInput
+
+    coop = new Coop bucket, scorer, randomizer, view, sound, userInput
     @coopSequencer = new CoopSequencer 500, coop
     @minnieSequencer = new MinnieSequencer coop
 

@@ -18,14 +18,13 @@
 
 
 class @Coop
-  constructor: (@scorer, @randomizer, @view, @soundSystem, @userInput)->
+  constructor: (@bucket, @scorer, @randomizer, @view, @soundSystem, @userInput)->
     @newLevelCallback = ->
     @accelerateCallback = ->
     @slowDownCallback = ->
     @stopTickingCallbacks = []
     @resumeTickingCallbacks = []
     @minnieDisplayed = false
-    @bucket = new Bucket @view, @userInput
     @eggsPresent = []
 
   onReachingNewLevel: (@newLevelCallback)->

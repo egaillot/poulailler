@@ -51,7 +51,9 @@ describe 'The Chicken Coop', ->
       shouldAccelerate: -> false
       shouldSlowDown: -> false
 
-    @coop = new Coop @scorer, @randomizer, @view, @soundSystem, @userInput
+    @bucket = new Bucket @view, @userInput
+
+    @coop = new Coop @bucket, @scorer, @randomizer, @view, @soundSystem, @userInput
 
     @getNewEggInBucket = =>
       @coop.throwNewEgg()
