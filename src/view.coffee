@@ -50,7 +50,7 @@ animateSequence = (shouldAnimate, $sequence, stepDuration, callback)->
 LEFT = 'left'
 RIGHT = 'right'
 
-class @View
+class @View extends @ScorerView
 
   displayEgg: (line, position)->
     $(".line-#{line}.egg-#{position}").show()
@@ -69,12 +69,6 @@ class @View
 
   eraseMinnie: ->
     $('.minnie').hide()
-
-  displayScore: (score)->
-    $('.score').text score
-
-  displayMiss: (miss)->
-    $('.miss').text miss
 
   fireMissSequence: (side, shouldAnimate, callback)->
     sequence = '.right-sequence'
