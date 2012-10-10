@@ -16,15 +16,28 @@
 # You should have received a copy of the GNU General Public License
 # along with Poulailler.  If not, see <http://www.gnu.org/licenses/>.
 
+POSITIONS = [
+  UserInput.UPPER_LEFT
+  UserInput.UPPER_RIGHT
+  UserInput.LOWER_LEFT
+  UserInput.LOWER_RIGHT ]
 
 class @Game
   constructor: ->
-    userInput = new UserInput
+    createBucket = (view)->
+      userInput = new UserInput
+      bucket = new Bucket view, userInput
+
+      userInput.onBucketPositionChange (n)->
+        bucket.moveTo(POSITIONS.indexOf n)
+
+      bucket
+
+
     sound = new SoundSystem
     view = new View
 
-    bucket = new Bucket view, userInput
-
+    bucket = createBucket view
     scorer = new Scorer view
     randomizer = new Randomizer
 

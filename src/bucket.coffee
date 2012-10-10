@@ -25,8 +25,6 @@ POSITIONS = [
 
 class @Bucket
   constructor: (@view, @userInput)->
-    @userInput.onBucketPositionChange (n)=>
-      @moveTo(POSITIONS.indexOf n)
     @position = 0
     @view.displayBucket @position
 

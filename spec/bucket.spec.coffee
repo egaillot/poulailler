@@ -23,10 +23,7 @@ describe 'A bucket', ->
       displayBucket: jasmine.createSpy 'displayBucket'
       eraseBucket: jasmine.createSpy 'eraseBucket'
 
-    @userInput =
-      onBucketPositionChange: (@callback)->
-
-    @bucket = new Bucket @view, @userInput
+    @bucket = new Bucket @view
 
   it 'can move around', ->
     expect(@bucket.position).toEqual 0
@@ -41,7 +38,3 @@ describe 'A bucket', ->
     @bucket.moveTo 2
     expect(@view.eraseBucket).toHaveBeenCalledWith 0
     expect(@view.displayBucket).toHaveBeenCalledWith 2
-
-  it 'hooks up with user input device', ->
-    @userInput.callback(UserInput.LOWER_RIGHT)
-    expect(@bucket.position).toEqual 3
