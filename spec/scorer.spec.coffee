@@ -19,11 +19,22 @@
 
 describe "A scorer", ->
   beforeEach ->
-    @view =
-      displayScore: jasmine.createSpy 'displayScore'
-      displayMiss: jasmine.createSpy 'displayMiss'
-    @scorer = new Scorer @view
+    @scorer = new Scorer
       
+  it "has an observable score", ->
+    callback = jasmine.createSpy 'on score changed callback'
+    @scorer.onScoreChanged callback
+    @scorer.score = 9
+    @scorer.fireScoreChanged()
+    expect(callback).toHaveBeenCalledWith 9
+
+  it "has observable miss points", ->
+    callback = jasmine.createSpy 'on miss changed callback'
+    @scorer.onMissChanged callback
+    @scorer.misses = 42
+    @scorer.fireMissChanged()
+    expect(callback).toHaveBeenCalledWith 42
+
   it "keeps track of score", ->
     expect(@scorer.score).toEqual 0
     @scorer.addPoint()
@@ -34,17 +45,19 @@ describe "A scorer", ->
     @scorer.addMiss 1
     expect(@scorer.misses).toEqual 1
 
-  it "displays score", ->
-    expect(@view.displayScore).toHaveBeenCalledWith 0
+  it "notifies its observer when score changes", ->
+    callback = jasmine.createSpy 'score change callback'
+    @scorer.onScoreChanged callback
     @scorer.addPoint()
-    expect(@view.displayScore).toHaveBeenCalledWith 1
+    expect(callback).toHaveBeenCalledWith 1
 
-  it "displays misses", ->
-    expect(@view.displayMiss).toHaveBeenCalledWith 0
+  it "notifies its observer when miss points changes", ->
+    callback = jasmine.createSpy 'miss change callback'
+    @scorer.onMissChanged callback
     @scorer.addMiss 1
-    expect(@view.displayMiss).toHaveBeenCalledWith 1
+    expect(callback).toHaveBeenCalledWith 1
     @scorer.addMiss 3
-    expect(@view.displayMiss).toHaveBeenCalledWith 4
+    expect(callback).toHaveBeenCalledWith 4
 
   it "tells game is over at 6th missed point", ->
     @scorer.misses = 5

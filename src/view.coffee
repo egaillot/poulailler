@@ -50,7 +50,7 @@ animateSequence = (shouldAnimate, $sequence, stepDuration, callback)->
 LEFT = 'left'
 RIGHT = 'right'
 
-class @View extends @ScorerView
+class @View
 
   displayEgg: (line, position)->
     $(".line-#{line}.egg-#{position}").show()

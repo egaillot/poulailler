@@ -18,6 +18,14 @@
 
 
 class @ScorerView
+
+  constructor: (scorer)->
+    alert scorer
+    scorer.onScoreChanged ((newScore)=> @displayScore newScore)
+    scorer.onMissChanged ((newMiss)=> @displayMiss newMiss)
+    @displayScore scorer.score
+    @displayMiss scorer.misses
+
   displayScore: (score)->
     $('.score').text score
 

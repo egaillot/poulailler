@@ -18,20 +18,29 @@
 
 
 class @Scorer
-  constructor: (@view)->
+  constructor: ->
+    @scoreCallback = ->
+    @missCallback = ->
     @score = 0
     @misses = 0
-    @view.displayScore @score
-    @view.displayMiss @misses
     @resetLevelThresholds()
+
+  onScoreChanged: (@scoreCallback)->
+  onMissChanged: (@missCallback)->
+
+  fireScoreChanged: ->
+    @scoreCallback @score
+
+  fireMissChanged: ->
+    @missCallback @misses
 
   addPoint: ->
     @score += 1
-    @view.displayScore @score
+    @fireScoreChanged @score
 
   addMiss: (m)->
     @misses += m
-    @view.displayMiss @misses
+    @fireMissChanged @misses
 
   gameOver: ->
     @misses >= 6

@@ -33,12 +33,13 @@ class @Game
 
       bucket
 
+    scorer = new Scorer
+    scorerView = new ScorerView scorer
 
     sound = new SoundSystem
     view = new View
 
     bucket = createBucket view
-    scorer = new Scorer view
     randomizer = new Randomizer
 
     coop = new Coop bucket, scorer, randomizer, view, sound
