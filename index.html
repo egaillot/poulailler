@@ -52,87 +52,89 @@ along with Poulailler.  If not, see <http://www.gnu.org/licenses/>.
     <audio src="resources/sounds/3.wav" class="line-beep-3" preload="auto"></audio>
     <audio src="resources/sounds/gotIt.wav" class="got-it" preload="auto"></audio>
 
-    <div>Score: <span class="score"></span></div>
-    <div>Miss: <span class="miss"></span></div>
-    <div class="sprites">
-      <div class="minnie">^_^</div>
-      <div class="game-over">Game Over!</div>
+    <div class="game-wrapper">
+      <div>Score: <span class="score"></span></div>
+      <div>Miss: <span class="miss"></span></div>
+      <div class="sprites">
+        <div class="minnie">^_^</div>
+        <div class="game-over">Game Over!</div>
 
-      <div class="line-0 egg-0">O</div>
-      <div class="line-0 egg-1">O</div>
-      <div class="line-0 egg-2">O</div>
-      <div class="line-0 egg-3">O</div>
-      <div class="line-0 egg-4">O</div>
+        <div class="line-0 egg-0">O</div>
+        <div class="line-0 egg-1">O</div>
+        <div class="line-0 egg-2">O</div>
+        <div class="line-0 egg-3">O</div>
+        <div class="line-0 egg-4">O</div>
 
-      <div class="line-1 egg-0">O</div>
-      <div class="line-1 egg-1">O</div>
-      <div class="line-1 egg-2">O</div>
-      <div class="line-1 egg-3">O</div>
-      <div class="line-1 egg-4">O</div>
+        <div class="line-1 egg-0">O</div>
+        <div class="line-1 egg-1">O</div>
+        <div class="line-1 egg-2">O</div>
+        <div class="line-1 egg-3">O</div>
+        <div class="line-1 egg-4">O</div>
 
-      <div class="line-2 egg-0">O</div>
-      <div class="line-2 egg-1">O</div>
-      <div class="line-2 egg-2">O</div>
-      <div class="line-2 egg-3">O</div>
-      <div class="line-2 egg-4">O</div>
+        <div class="line-2 egg-0">O</div>
+        <div class="line-2 egg-1">O</div>
+        <div class="line-2 egg-2">O</div>
+        <div class="line-2 egg-3">O</div>
+        <div class="line-2 egg-4">O</div>
 
-      <div class="line-3 egg-0">O</div>
-      <div class="line-3 egg-1">O</div>
-      <div class="line-3 egg-2">O</div>
-      <div class="line-3 egg-3">O</div>
-      <div class="line-3 egg-4">O</div>
+        <div class="line-3 egg-0">O</div>
+        <div class="line-3 egg-1">O</div>
+        <div class="line-3 egg-2">O</div>
+        <div class="line-3 egg-3">O</div>
+        <div class="line-3 egg-4">O</div>
 
-      <div id="broken-0" class="left-sequence">
-        <audio src="resources/sounds/crash.wav" class="crash" preload="auto"></audio>
-        &gt;.&lt;
-      </div>
-      <div id="broken-1" class="left-sequence">
-        <audio src="resources/sounds/bye.wav" class="bye" preload="auto"></audio>
-        &lt;^&gt;
-      </div>
-      <div id="broken-2" class="left-sequence">
-        <audio src="resources/sounds/bye.wav" class="bye" preload="auto"></audio>
-        &lt;*
-      </div>
-      <div id="broken-3" class="left-sequence">
-        <audio src="resources/sounds/bye.wav" class="bye" preload="auto"></audio>
-        &lt;*
-      </div>
-      <div id="broken-4" class="left-sequence">
-        <audio src="resources/sounds/bye.wav" class="bye" preload="auto"></audio>
-        &lt;*
-      </div>
+        <div id="broken-0" class="left-sequence">
+          <audio src="resources/sounds/crash.wav" class="crash" preload="auto"></audio>
+          &gt;.&lt;
+        </div>
+        <div id="broken-1" class="left-sequence">
+          <audio src="resources/sounds/bye.wav" class="bye" preload="auto"></audio>
+          &lt;^&gt;
+        </div>
+        <div id="broken-2" class="left-sequence">
+          <audio src="resources/sounds/bye.wav" class="bye" preload="auto"></audio>
+          &lt;*
+        </div>
+        <div id="broken-3" class="left-sequence">
+          <audio src="resources/sounds/bye.wav" class="bye" preload="auto"></audio>
+          &lt;*
+        </div>
+        <div id="broken-4" class="left-sequence">
+          <audio src="resources/sounds/bye.wav" class="bye" preload="auto"></audio>
+          &lt;*
+        </div>
 
-      <div id="broken-5" class="right-sequence">
-        <audio src="resources/sounds/crash.wav" class="crash" preload="auto"></audio>
-        &gt;.&lt;
-      </div>
-      <div id="broken-6" class="right-sequence">
-        <audio src="resources/sounds/bye.wav" class="bye" preload="auto"></audio>
-        &lt;^&gt;
-      </div>
-      <div id="broken-7" class="right-sequence">
-        <audio src="resources/sounds/bye.wav" class="bye" preload="auto"></audio>
-        *&gt;
-      </div>
-      <div id="broken-8" class="right-sequence">
-        <audio src="resources/sounds/bye.wav" class="bye" preload="auto"></audio>
-        *&gt;
-      </div>
-      <div id="broken-9" class="right-sequence">
-        <audio src="resources/sounds/bye.wav" class="bye" preload="auto"></audio>
-        *&gt;
-      </div>
+        <div id="broken-5" class="right-sequence">
+          <audio src="resources/sounds/crash.wav" class="crash" preload="auto"></audio>
+          &gt;.&lt;
+        </div>
+        <div id="broken-6" class="right-sequence">
+          <audio src="resources/sounds/bye.wav" class="bye" preload="auto"></audio>
+          &lt;^&gt;
+        </div>
+        <div id="broken-7" class="right-sequence">
+          <audio src="resources/sounds/bye.wav" class="bye" preload="auto"></audio>
+          *&gt;
+        </div>
+        <div id="broken-8" class="right-sequence">
+          <audio src="resources/sounds/bye.wav" class="bye" preload="auto"></audio>
+          *&gt;
+        </div>
+        <div id="broken-9" class="right-sequence">
+          <audio src="resources/sounds/bye.wav" class="bye" preload="auto"></audio>
+          *&gt;
+        </div>
 
-      <div class="bucket-0">__/</div>
-      <div class="bucket-1">\__</div>
-      <div class="bucket-2">__/</div>
-      <div class="bucket-3">\__</div>
+        <div class="bucket-0">__/</div>
+        <div class="bucket-1">\__</div>
+        <div class="bucket-2">__/</div>
+        <div class="bucket-3">\__</div>
+      </div>
     </div>
 
     <script type="text/coffeescript">
       game = new Game()
-      game.init()
+      #game.init()
     </script>
   </body>
 </html>

@@ -20,12 +20,19 @@
  */
 
 
+.game-wrapper {
+}
+
 .sprites {
   position: relative;
+  background: #cdd3d5;
+  width: 310px;
+  height: 220px;
+  margin: 30px auto 0;
 }
 
 .sprites > * {
-  display: none;
+  _display: none;
   position: absolute;
 }
 
