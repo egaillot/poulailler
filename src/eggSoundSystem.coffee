@@ -17,13 +17,16 @@
 # along with Poulailler.  If not, see <http://www.gnu.org/licenses/>.
 
 
+class @EggSoundSystem
 
-class @EggFactory
-  constructor: (@randomizer)->
+  constructor: (egg)->
+    @eggLine = egg.line
+    egg.onPositionChanged (=> @playEggLineBeep())
+    @playEggLineBeep()
 
-  newEgg: ->
-    egg = new Egg @randomizer.nextRandomLine()
-    new EggView egg
-    new EggSoundSystem egg
-    egg
-    
+  playEggLineBeep: ->
+    beep = $ ".line-beep-#{@eggLine}"
+    return if beep.length == 0
+    beep[0].play()
+
+
