@@ -20,8 +20,6 @@
 describe 'The Chicken Coop', ->
   beforeEach ->
     @view =
-      displayEgg: ->
-      eraseEgg: ->
       displayBucket: ->
       eraseBucket: ->
       displayMinnie: jasmine.createSpy 'displayMinnie'
@@ -30,18 +28,16 @@ describe 'The Chicken Coop', ->
       fireMissSequence: jasmine.createSpy('fireMissSequence')
                                .andCallFake (side, shouldAnimate, callback)-> callback()
 
-
     @soundSystem =
       playEggLineBeep: ->
       playGotIt: jasmine.createSpy 'playGotIt'
 
-    @userInput =
-      onBucketPositionChange: (@callback)->
-
-    @randomizer = 
-      nextRandomLine: ->
+    @eggFactory =
+      nextLine: ->
         return @cpt += 1 unless @cpt == undefined
         return @cpt = 0
+      newEgg: ->
+        new Egg @nextLine()
 
     @scorer = 
       addPoint: jasmine.createSpy 'addPoint'
@@ -53,7 +49,7 @@ describe 'The Chicken Coop', ->
 
     @bucket = { position: 0 }
 
-    @coop = new Coop @bucket, @scorer, @randomizer, @view, @soundSystem
+    @coop = new Coop @bucket, @scorer, @eggFactory, @view, @soundSystem
 
     @getNewEggInBucket = =>
       @coop.throwNewEgg()
@@ -144,7 +140,7 @@ describe 'The Chicken Coop', ->
 
 
   it 'fires right miss sequence when egg breaks on right', ->
-    @randomizer.nextRandomLine = -> 1
+    @eggFactory.nextLine = -> 1
 
     @getNewEggBroken()
 

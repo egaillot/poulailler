@@ -17,8 +17,9 @@
 # along with Poulailler.  If not, see <http://www.gnu.org/licenses/>.
 
 
+
 class @Coop
-  constructor: (@bucket, @scorer, @randomizer, @view, @soundSystem)->
+  constructor: (@bucket, @scorer, @eggFactory, @view, @soundSystem)->
     @newLevelCallback = ->
     @accelerateCallback = ->
     @slowDownCallback = ->
@@ -34,7 +35,7 @@ class @Coop
   onResumeTicking: (callback)-> @resumeTickingCallbacks.push callback
 
   throwNewEgg: ->
-    @eggsPresent.unshift new Egg(@randomizer.nextRandomLine(), @view, @soundSystem)
+    @eggsPresent.unshift @eggFactory.newEgg()
 
   tick: ->
     egg = @eggsPresent.pop()

@@ -16,36 +16,13 @@
 # You should have received a copy of the GNU General Public License
 # along with Poulailler.  If not, see <http://www.gnu.org/licenses/>.
 
-POSITIONS = [
-  UserInput.UPPER_LEFT
-  UserInput.UPPER_RIGHT
-  UserInput.LOWER_LEFT
-  UserInput.LOWER_RIGHT ]
 
-class @Game
-  constructor: ->
-    createBucket = (view)->
-      userInput = new UserInput
-      bucket = new Bucket view, userInput
 
-      userInput.onBucketPositionChange (n)->
-        bucket.moveTo(POSITIONS.indexOf n)
+class @EggFactory
+  constructor: (@randomizer)->
 
-      bucket
-
-    scorer = new Scorer
-    scorerView = new ScorerView scorer
-
-    sound = new SoundSystem
-    view = new View
-
-    bucket = createBucket view
-    eggFactory = new EggFactory (new Randomizer)
-
-    coop = new Coop bucket, scorer, eggFactory, view, sound
-    @coopSequencer = new CoopSequencer 500, coop
-    @minnieSequencer = new MinnieSequencer coop
-
-  init: ->
-    @coopSequencer.start()
-    @minnieSequencer.start()
+  newEgg: ->
+    egg = new Egg @randomizer.nextRandomLine()
+    eggView = new EggView egg
+    egg
+    

@@ -1,4 +1,4 @@
-<!--
+  <!--
 This file is part of Poulailler - a browser-revival
 of famous Nintendo's Game & Watch Mickey Mouse.
 
@@ -25,29 +25,26 @@ along with Poulailler.  If not, see <http://www.gnu.org/licenses/>.
     <meta charset="utf-8">
     <script src="../lib/jquery-1.7.2.js"></script>
     <script src="../lib/coffee-script.js"></script>
-    <script type="text/coffeescript" src="../src/view.coffee"></script>
+    <script type="text/coffeescript" src="../src/egg.coffee"></script>
+    <script type="text/coffeescript" src="../src/eggView.coffee"></script>
   </head>
   <body>
     <div>
-      Bucket:
-      <span class="bucket-0" style="display: none;">Left</span>
-      <span class="bucket-1" style="display: none;">Right</span>
+      Egg:
+      <span class="line-0 egg-0" style="display: none;">First</span>
+      <span class="line-0 egg-1" style="display: none;">Second in same line</span>
+      <span class="line-1 egg-1" style="display: none;">Some egg elsewhere</span>
     </div>
-    <div class="minnie" style="display: none;">Minnie here!</div>
-    <div class="game-over" style="display: none;">Game Over!</div>
-
     <script type="text/coffeescript">
-      view = new View
-      view.displayBucket 1
-      view.displayMinnie()
+      egg = new Egg 0
+      view = new EggView egg
       setTimeout ->
-        view.eraseBucket 1
-        view.displayBucket 0
-        
-        view.eraseMinnie()
-
-        view.fireGameOverSequence()
+        egg.move()
       , 1000
+      setTimeout ->
+        egg.hide()
+        view.displayEgg 1, 1
+      , 2000
     </script>
   </body>
 </html>

@@ -46,17 +46,10 @@ animateSequence = (shouldAnimate, $sequence, stepDuration, callback)->
   setTimeout callback, sequenceDuration
 
 
-
 LEFT = 'left'
 RIGHT = 'right'
 
 class @View
-
-  displayEgg: (line, position)->
-    $(".line-#{line}.egg-#{position}").show()
-
-  eraseEgg: (line, position)->
-    $(".line-#{line}.egg-#{position}").hide()
 
   displayBucket: (position)->
     $(".bucket-#{position}").show()

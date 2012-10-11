@@ -21,21 +21,29 @@ EGG_ABOUT_TO_FALL_POSITION = 4
 
 class @Egg
 
-  constructor: (@line, @view, @sound)->
+  constructor: (@line)->
+    @hideCallback = ->
+    @positionChangedCallbacks = []
     @position = 0
-    @show()
+
+  onPositionChanged: (callback)->
+    @positionChangedCallbacks.push callback
+
+  onHide: (@hideCallback) ->
+
+  firePositionChanged: ->
+    callback(@line, @position) for callback in @positionChangedCallbacks
 
   move: ->
-    @hide()
     @position += 1
-    @show()
+    @firePositionChanged()
 
-  show: ->
-    @view.displayEgg @line, @position
-    @sound.playEggLineBeep @line
+#  show: ->
+#    @view.displayEgg @line, @position
+#    @sound.playEggLineBeep @line
 
   hide: ->
-    @view.eraseEgg @line, @position
+    @hideCallback(@line, @position)
 
   aboutToFall: ->
     @position == EGG_ABOUT_TO_FALL_POSITION

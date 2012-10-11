@@ -19,33 +19,40 @@
 
 describe "An egg", ->
 
-  beforeEach ->
-    @view =
-      displayEgg: jasmine.createSpy 'displayEgg'
-      eraseEgg: jasmine.createSpy 'eraseEgg'
+  it "can be observed by several observers", ->
+    displayCallback = jasmine.createSpy 'displayCallback'
+    soundCallback = jasmine.createSpy 'soundCallback'
+    egg = new Egg 42
+    egg.onPositionChanged displayCallback
+    egg.onPositionChanged soundCallback
 
-    @sound =
-      playEggLineBeep: jasmine.createSpy 'playEggLineBeep'
+    egg.firePositionChanged()
 
-  it "can be seen and heard", ->
-    egg = new Egg 42, @view, @sound
-    expect(@view.displayEgg).toHaveBeenCalledWith 42, 0
-    expect(@sound.playEggLineBeep).toHaveBeenCalledWith 42
+    expect(displayCallback).toHaveBeenCalledWith 42, 0
+    expect(soundCallback).toHaveBeenCalledWith 42, 0
 
   it "can move", ->
-    egg = new Egg 0, @view, @sound
+    callback = jasmine.createSpy 'position change callback'
+    egg = new Egg 0
     expect(egg.position).toEqual 0
-    egg.move()
-    expect(egg.position).toEqual 1
 
-  it "can hide itself", ->
-    egg = new Egg 4807, @view, @sound
+    egg.onPositionChanged callback
     egg.move()
-    expect(@view.eraseEgg).toHaveBeenCalledWith 4807, 0
-    expect(@view.displayEgg).toHaveBeenCalledWith 4807, 1
+
+    expect(egg.position).toEqual 1
+    expect(callback).toHaveBeenCalledWith 0, 1
+
+  it "can hide", ->
+    callback = jasmine.createSpy 'hide callback'
+    egg = new Egg 3
+
+    egg.onHide callback
+    egg.hide()
+
+    expect(callback).toHaveBeenCalledWith 3, 0
 
   it "knows when it is about to fall", ->
-    egg = new Egg 0, @view, @sound
+    egg = new Egg 0
     egg.position = 3
     expect(egg.aboutToFall()).toBeFalsy()
     egg.position = 4
@@ -54,7 +61,7 @@ describe "An egg", ->
   describe "knows on which side it lies", ->
     beforeEach ->
       @expectSide = (expectedSide, eggLine)=>
-        egg = new Egg eggLine, @view, @sound
+        egg = new Egg eggLine
         expect(egg.side()).toEqual expectedSide
 
     it "on line 0", ->
