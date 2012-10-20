@@ -27,7 +27,8 @@ along with Poulailler.  If not, see <http://www.gnu.org/licenses/>.
     <script src="../lib/coffee-script.js"></script>
     <script type="text/coffeescript" src="../src/soundSystem.coffee"></script>
     <script type="text/coffeescript" src="../src/scorerView.coffee"></script>
-    <script type="text/coffeescript" src="../src/view.coffee"></script>
+    <script type="text/coffeescript" src="../src/coop.coffee"></script>
+    <script type="text/coffeescript" src="../src/coopView.coffee"></script>
   </head>
   <body style="position: relative">
     <div id="item1" class="left-sequence" style="position: absolute; top: 50px; display: none;">0</div>
@@ -48,12 +49,13 @@ along with Poulailler.  If not, see <http://www.gnu.org/licenses/>.
     </div>
 
     <script type="text/coffeescript">
-      view = new View
-      view.fireMissSequence View.LEFT, true, -> 
+      coop = new Coop
+      view = new CoopView coop
+      view.fireMissSequence CoopView.LEFT, true, -> 
         console.log 'Animated left sequence'
-        view.fireMissSequence View.LEFT, false, ->
+        view.fireMissSequence CoopView.LEFT, false, ->
           console.log '… then non-animated left sequence'
-          view.fireMissSequence View.RIGHT, true, ->
+          view.fireMissSequence CoopView.RIGHT, true, ->
             console.log '… then animated right sequence, with sound'
     </script>
   </body>
