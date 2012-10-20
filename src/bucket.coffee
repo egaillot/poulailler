@@ -18,11 +18,13 @@
 
 
 class @Bucket
-  constructor: (@view)->
+  constructor: ->
     @position = 0
-    @view.displayBucket @position
+    @positionChangeCallback = ->
+
+  onPositionChange: (@positionChangeCallback)->
 
   moveTo: (newPosition)->
-    @view.eraseBucket @position
+    oldPosition = @position
     @position = newPosition
-    @view.displayBucket @position
+    @positionChangeCallback oldPosition, newPosition

@@ -25,19 +25,21 @@ along with Poulailler.  If not, see <http://www.gnu.org/licenses/>.
     <meta charset="utf-8">
     <script src="../lib/jquery-1.7.2.js"></script>
     <script src="../lib/coffee-script.js"></script>
-    <script type="text/coffeescript" src="../src/view.coffee"></script>
+    <script type="text/coffeescript" src="../src/bucket.coffee"></script>
+    <script type="text/coffeescript" src="../src/bucketView.coffee"></script>
   </head>
   <body>
-    <div class="minnie" style="display: none;">Minnie here!</div>
-    <div class="game-over" style="display: none;">Game Over!</div>
+    <div>
+      Bucket:
+      <span class="bucket-0" style="display: none;">Left</span>
+      <span class="bucket-1" style="display: none;">Right</span>
+    </div>
 
     <script type="text/coffeescript">
-      view = new View
-      view.displayMinnie()
+      bucket = new Bucket
+      view = new BucketView bucket
       setTimeout ->
-        view.eraseMinnie()
-
-        view.fireGameOverSequence()
+        bucket.moveTo 1
       , 1000
     </script>
   </body>

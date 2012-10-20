@@ -24,9 +24,10 @@ POSITIONS = [
 
 class @Game
   constructor: ->
-    createBucket = (view)->
+    createBucket = ->
+      bucket = new Bucket
+      new BucketView bucket
       userInput = new UserInput
-      bucket = new Bucket view, userInput
 
       userInput.onBucketPositionChange (n)->
         bucket.moveTo(POSITIONS.indexOf n)
@@ -39,7 +40,7 @@ class @Game
     sound = new SoundSystem
     view = new View
 
-    bucket = createBucket view
+    bucket = createBucket()
     eggFactory = new EggFactory (new Randomizer)
 
     coop = new Coop bucket, scorer, eggFactory, view, sound

@@ -51,12 +51,6 @@ RIGHT = 'right'
 
 class @View
 
-  displayBucket: (position)->
-    $(".bucket-#{position}").show()
-
-  eraseBucket: (position)->
-    $(".bucket-#{position}").hide()
-
   displayMinnie: ->
     $('.minnie').show()
 

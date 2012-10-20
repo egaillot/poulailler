@@ -17,20 +17,17 @@
 # along with Poulailler.  If not, see <http://www.gnu.org/licenses/>.
 
 
-describe 'A bucket', ->
-  beforeEach ->
-    @bucket = new Bucket
+class @BucketView
 
-  it 'can move around', ->
-    expect(@bucket.position).toEqual 0
+  constructor: (bucket)->
+    @displayBucket bucket.position
+    bucket.onPositionChange (oldPosition, newPosition)=>
+      @eraseBucket oldPosition
+      @displayBucket newPosition
 
-    @bucket.moveTo 2
-    expect(@bucket.position).toEqual 2
 
-  it 'notifies its observers when its position changes', ->
-    callback = jasmine.createSpy 'position change callback'
-    @bucket.onPositionChange callback
+  displayBucket: (position)->
+    $(".bucket-#{position}").show()
 
-    @bucket.moveTo 2
-
-    expect(callback).toHaveBeenCalledWith 0, 2
+  eraseBucket: (position)->
+    $(".bucket-#{position}").hide()
