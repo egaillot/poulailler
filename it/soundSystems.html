@@ -28,7 +28,8 @@ along with Poulailler.  If not, see <http://www.gnu.org/licenses/>.
     <script type="text/coffeescript" src="../src/egg.coffee"></script>
     <script type="text/coffeescript" src="../src/eggSoundSystem.coffee"></script>
 
-    <script type="text/coffeescript" src="../src/soundSystem.coffee"></script>
+    <script type="text/coffeescript" src="../src/coop.coffee"></script>
+    <script type="text/coffeescript" src="../src/coopSoundSystem.coffee"></script>
   </head>
   <body>
     <audio src="../resources/sounds/0.wav" class="line-beep-0" preload="auto"></audio>
@@ -37,8 +38,10 @@ along with Poulailler.  If not, see <http://www.gnu.org/licenses/>.
     <audio src="../resources/sounds/3.wav" class="line-beep-3" preload="auto"></audio>
     <audio src="../resources/sounds/gotIt.wav" class="got-it" preload="auto"></audio>
     <script type="text/coffeescript">
-      soundSystem = new SoundSystem
-      soundSystem.playGotIt()
+      coop = new Coop
+
+      soundSystem = new CoopSoundSystem coop
+      coop.eggCaughtCallback()
 
       i = 0
       for delay in [500, 1000, 1500, 2000]

@@ -23,28 +23,27 @@ POSITIONS = [
   UserInput.LOWER_RIGHT ]
 
 class @Game
+
   constructor: ->
     createBucket = ->
       bucket = new Bucket
       new BucketView bucket
       userInput = new UserInput
-
       userInput.onBucketPositionChange (n)->
         bucket.moveTo(POSITIONS.indexOf n)
-
       bucket
 
-    scorer = new Scorer
-    scorerView = new ScorerView scorer
+    createScorer = ->
+      scorer = new Scorer
+      new ScorerView scorer
+      scorer
 
-    sound = new SoundSystem
-    bucket = createBucket()
-    eggFactory = new EggFactory (new Randomizer)
-    coop = new Coop bucket, scorer, eggFactory, sound
+    coop = new Coop createBucket(), createScorer(), new EggFactory (new Randomizer)
 
     @coopSequencer = new CoopSequencer 500, coop
     @minnieSequencer = new MinnieSequencer coop
     view = new CoopView coop
+    sound = new CoopSoundSystem coop
 
   init: ->
     @coopSequencer.start()

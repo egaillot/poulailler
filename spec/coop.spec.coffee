@@ -19,10 +19,6 @@
 
 describe 'The Chicken Coop', ->
   beforeEach ->
-    @soundSystem =
-      playEggLineBeep: ->
-      playGotIt: jasmine.createSpy 'playGotIt'
-
     @eggFactory =
       nextLine: ->
         return @cpt += 1 unless @cpt == undefined
@@ -40,7 +36,7 @@ describe 'The Chicken Coop', ->
 
     @bucket = { position: 0 }
 
-    @coop = new Coop @bucket, @scorer, @eggFactory, @soundSystem
+    @coop = new Coop @bucket, @scorer, @eggFactory
     @callback = jasmine.createSpy('missed egg callback')
                        .andCallFake (side, shouldAnimate, callback)-> callback()
     @coop.onMissedEgg @callback
@@ -81,21 +77,25 @@ describe 'The Chicken Coop', ->
     beforeEach ->
       @scorer.hasReachedNewLevel = -> true
       @scorer.levelReached = -> 3
-      @gotNotified = 0
-      @coop.onReachingNewLevel (newLevel)=> @gotNotified = newLevel
+
+      @newLevelReachedCallback = jasmine.createSpy 'new level reached callback'
+      @coop.onReachingNewLevel (newLevel)=> @newLevelReachedCallback newLevel
+
+      @eggCaughtCallback = jasmine.createSpy 'egg caught callback'
+      @coop.onEggCaught => @eggCaughtCallback()
 
       @getNewEggInBucket()
 
     it 'signals when reaching new level', ->
-      expect(@gotNotified).toEqual 3
+      expect(@newLevelReachedCallback).toHaveBeenCalledWith 3
 
     it 'throws new egg when current egg at end of line', ->
       expect(@coop.eggsPresent.length).toEqual 1
       expect(@coop.eggsPresent[0].position).toEqual 0
       expect(@coop.eggsPresent[0].line).toEqual 1
 
-    it 'plays a "got it" beep', ->
-      expect(@soundSystem.playGotIt).toHaveBeenCalled()
+    it 'notifies its observers', ->
+      expect(@eggCaughtCallback).toHaveBeenCalled()
 
 
 

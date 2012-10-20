@@ -17,6 +17,10 @@
 # along with Poulailler.  If not, see <http://www.gnu.org/licenses/>.
 
 
-class @SoundSystem
+class @CoopSoundSystem
+
+  constructor: (coop)->
+    coop.onEggCaught => @playGotIt()
+
   playGotIt: ->
     $('.got-it')[0].play()

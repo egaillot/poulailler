@@ -19,10 +19,11 @@
 
 
 class @Coop
-  constructor: (@bucket, @scorer, @eggFactory, @soundSystem)->
+  constructor: (@bucket, @scorer, @eggFactory)->
     @newLevelCallback = ->
     @accelerateCallback = ->
     @slowDownCallback = ->
+    @eggCaughtCallback = ->
     @missedEggCallback = ->
     @minnieAppearanceCallback = ->
     @minnieDisappearanceCallback = ->
@@ -35,6 +36,7 @@ class @Coop
   onReachingNewLevel: (@newLevelCallback)->
   onAccelerate: (@accelerateCallback)->
   onSlowDown: (@slowDownCallback)->
+  onEggCaught: (@eggCaughtCallback)->
   onMissedEgg: (@missedEggCallback)->
   onMinnieAppearing: (@minnieAppearanceCallback)->
   onMinnieDisappearing: (@minnieDisappearanceCallback)->
@@ -54,7 +56,7 @@ class @Coop
     if egg.line == @bucket.position then @handleEggCaught() else @handleEggMissed egg
 
   handleEggCaught: ->
-    @soundSystem.playGotIt()
+    @eggCaughtCallback()
     @scorer.addPoint()
     @accelerateCallback() if @scorer.shouldAccelerate()
     @slowDownCallback() if @scorer.shouldSlowDown()
