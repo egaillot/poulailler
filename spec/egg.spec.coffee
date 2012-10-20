@@ -65,13 +65,13 @@ describe "An egg", ->
         expect(egg.side()).toEqual expectedSide
 
     it "on line 0", ->
-      @expectSide View.LEFT, 0
+      @expectSide CoopView.LEFT, 0
 
     it "on line 1", ->
-      @expectSide View.RIGHT, 1
+      @expectSide CoopView.RIGHT, 1
 
     it "on line 2", ->
-      @expectSide View.LEFT, 2
+      @expectSide CoopView.LEFT, 2
 
     it "on line 3", ->
-      @expectSide View.RIGHT, 3
+      @expectSide CoopView.RIGHT, 3

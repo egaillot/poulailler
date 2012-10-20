@@ -19,15 +19,6 @@
 
 describe 'The Chicken Coop', ->
   beforeEach ->
-    @view =
-      displayBucket: ->
-      eraseBucket: ->
-      displayMinnie: jasmine.createSpy 'displayMinnie'
-      eraseMinnie: jasmine.createSpy 'eraseMinnie'
-      fireGameOverSequence: jasmine.createSpy 'fireGameOverSequence'
-      fireMissSequence: jasmine.createSpy('fireMissSequence')
-                               .andCallFake (side, shouldAnimate, callback)-> callback()
-
     @soundSystem =
       playEggLineBeep: ->
       playGotIt: jasmine.createSpy 'playGotIt'
@@ -39,7 +30,7 @@ describe 'The Chicken Coop', ->
       newEgg: ->
         new Egg @nextLine()
 
-    @scorer = 
+    @scorer =
       addPoint: jasmine.createSpy 'addPoint'
       addMiss: jasmine.createSpy 'addMiss'
       hasReachedNewLevel: jasmine.createSpy('hasReachedNewLevel').andReturn false
@@ -49,7 +40,10 @@ describe 'The Chicken Coop', ->
 
     @bucket = { position: 0 }
 
-    @coop = new Coop @bucket, @scorer, @eggFactory, @view, @soundSystem
+    @coop = new Coop @bucket, @scorer, @eggFactory, @soundSystem
+    @callback = jasmine.createSpy('missed egg callback')
+                       .andCallFake (side, shouldAnimate, callback)-> callback()
+    @coop.onMissedEgg @callback
 
     @getNewEggInBucket = =>
       @coop.throwNewEgg()
@@ -82,7 +76,7 @@ describe 'The Chicken Coop', ->
 
 
 
-    
+
   describe '(when egg falls into bucket)', ->
     beforeEach ->
       @scorer.hasReachedNewLevel = -> true
@@ -120,9 +114,9 @@ describe 'The Chicken Coop', ->
       expect(@scorer.hasReachedNewLevel).not.toHaveBeenCalled()
 
     it 'fires non-animated miss sequence', ->
-      expect(@view.fireMissSequence).toHaveBeenCalled()
-      expect(@view.fireMissSequence.mostRecentCall.args[0]).toEqual View.LEFT
-      expect(@view.fireMissSequence.mostRecentCall.args[1]).toEqual false
+      expect(@callback).toHaveBeenCalled()
+      expect(@callback.mostRecentCall.args[0]).toEqual CoopView.LEFT
+      expect(@callback.mostRecentCall.args[1]).toEqual false
 
 
 
@@ -135,8 +129,8 @@ describe 'The Chicken Coop', ->
       expect(@scorer.addMiss).toHaveBeenCalledWith 1
 
     it 'fires animated miss sequence', ->
-      expect(@view.fireMissSequence).toHaveBeenCalled()
-      expect(@view.fireMissSequence.mostRecentCall.args[1]).toEqual true
+      expect(@callback).toHaveBeenCalled()
+      expect(@callback.mostRecentCall.args[1]).toEqual true
 
 
   it 'fires right miss sequence when egg breaks on right', ->
@@ -144,18 +138,21 @@ describe 'The Chicken Coop', ->
 
     @getNewEggBroken()
 
-    expect(@view.fireMissSequence).toHaveBeenCalled()
-    expect(@view.fireMissSequence.mostRecentCall.args[0]).toEqual View.RIGHT
+    expect(@callback).toHaveBeenCalled()
+    expect(@callback.mostRecentCall.args[0]).toEqual CoopView.RIGHT
 
   it 'notifies when game is over', ->
     @scorer.gameOver = -> true
     gotCalled = false
     @coop.onStopTicking -> gotCalled = true
 
+    gameOverCallback = jasmine.createSpy 'game over callback'
+    @coop.onGameOver gameOverCallback
+
     @getNewEggBroken()
 
     expect(gotCalled).toBeTruthy()
-    expect(@view.fireGameOverSequence).toHaveBeenCalled()
+    expect(gameOverCallback).toHaveBeenCalled()
 
   it 'notifies when game should accelerate', ->
     @scorer.shouldAccelerate = -> true
@@ -187,11 +184,15 @@ describe 'The Chicken Coop', ->
     expect(otherStopGotCalled).toBeTruthy()
     expect(resumeGotCalled).toBeTruthy()
 
-  it 'asks view to display Minnie', ->
+  it 'notifies its observer when Minnie appears', ->
+    callback = jasmine.createSpy 'Minnie appearance callback'
+    @coop.onMinnieAppearing callback
     @coop.showMinnie()
-    expect(@view.displayMinnie).toHaveBeenCalled()
+    expect(callback).toHaveBeenCalled()
 
-  it 'asks view to erase Minnie', ->
+  it 'notifies its observer when Minnie disappears', ->
+    callback = jasmine.createSpy 'Minnie disappearance callback'
+    @coop.onMinnieDisappearing callback
     @coop.hideMinnie()
-    expect(@view.eraseMinnie).toHaveBeenCalled()
+    expect(callback).toHaveBeenCalled()
 

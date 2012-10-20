@@ -49,7 +49,13 @@ animateSequence = (shouldAnimate, $sequence, stepDuration, callback)->
 LEFT = 'left'
 RIGHT = 'right'
 
-class @View
+class @CoopView
+
+  constructor: (coop)->
+    coop.onMinnieAppearing => @displayMinnie()
+    coop.onMinnieDisappearing => @eraseMinnie()
+    coop.onMissedEgg (side, shouldAnimate, callback)=> @fireMissSequence(side, shouldAnimate, callback)
+    coop.onGameOver => @fireGameOverSequence()
 
   displayMinnie: ->
     $('.minnie').show()
@@ -65,5 +71,5 @@ class @View
   fireGameOverSequence: ->
     $('.game-over').show()
 
-@View.LEFT = LEFT
-@View.RIGHT = RIGHT
+@CoopView.LEFT = LEFT
+@CoopView.RIGHT = RIGHT

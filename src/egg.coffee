@@ -38,10 +38,6 @@ class @Egg
     @position += 1
     @firePositionChanged()
 
-#  show: ->
-#    @view.displayEgg @line, @position
-#    @sound.playEggLineBeep @line
-
   hide: ->
     @hideCallback(@line, @position)
 
@@ -49,7 +45,7 @@ class @Egg
     @position == EGG_ABOUT_TO_FALL_POSITION
 
   side: ->
-    if @line % 2 == 0 then View.LEFT else View.RIGHT
+    if @line % 2 == 0 then CoopView.LEFT else CoopView.RIGHT
 
 
 @Egg.ABOUT_TO_FALL_POSITION = EGG_ABOUT_TO_FALL_POSITION

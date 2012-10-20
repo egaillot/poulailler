@@ -19,10 +19,14 @@
 
 
 class @Coop
-  constructor: (@bucket, @scorer, @eggFactory, @view, @soundSystem)->
+  constructor: (@bucket, @scorer, @eggFactory, @soundSystem)->
     @newLevelCallback = ->
     @accelerateCallback = ->
     @slowDownCallback = ->
+    @missedEggCallback = ->
+    @minnieAppearanceCallback = ->
+    @minnieDisappearanceCallback = ->
+    @gameOverCallback = ->
     @stopTickingCallbacks = []
     @resumeTickingCallbacks = []
     @minnieDisplayed = false
@@ -31,6 +35,10 @@ class @Coop
   onReachingNewLevel: (@newLevelCallback)->
   onAccelerate: (@accelerateCallback)->
   onSlowDown: (@slowDownCallback)->
+  onMissedEgg: (@missedEggCallback)->
+  onMinnieAppearing: (@minnieAppearanceCallback)->
+  onMinnieDisappearing: (@minnieDisappearanceCallback)->
+  onGameOver: (@gameOverCallback)->
   onStopTicking: (callback)-> @stopTickingCallbacks.push callback
   onResumeTicking: (callback)-> @resumeTickingCallbacks.push callback
 
@@ -62,9 +70,9 @@ class @Coop
 
   fireMissSequence: (side, shouldAnimate)->
     callback() for callback in @stopTickingCallbacks
-    @view.fireMissSequence side, shouldAnimate, =>
+    @missedEggCallback side, shouldAnimate, =>
       if @scorer.gameOver()
-        @view.fireGameOverSequence()
+        @gameOverCallback()
       else
         callback() for callback in @resumeTickingCallbacks
         @throwNewEgg()
@@ -75,8 +83,8 @@ class @Coop
 
   showMinnie: ->
     @minnieDisplayed = true
-    @view.displayMinnie()
+    @minnieAppearanceCallback()
 
   hideMinnie: ->
     @minnieDisplayed = false
-    @view.eraseMinnie()
+    @minnieDisappearanceCallback()

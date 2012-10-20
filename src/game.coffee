@@ -38,14 +38,13 @@ class @Game
     scorerView = new ScorerView scorer
 
     sound = new SoundSystem
-    view = new View
-
     bucket = createBucket()
     eggFactory = new EggFactory (new Randomizer)
+    coop = new Coop bucket, scorer, eggFactory, sound
 
-    coop = new Coop bucket, scorer, eggFactory, view, sound
     @coopSequencer = new CoopSequencer 500, coop
     @minnieSequencer = new MinnieSequencer coop
+    view = new CoopView coop
 
   init: ->
     @coopSequencer.start()
