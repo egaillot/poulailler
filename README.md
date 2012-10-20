@@ -50,5 +50,7 @@ The program is written in [CoffeeScript](http://coffeescript.org), HTML
 and CSS. It uses [jQuery](http://jquery.com).  Tests are writen using the 
 [Jasmine framework](http://pivotal.github.com/jasmine).
 
+Sounds were created using [as3sfxr](http://www.superflashbros.net/as3sfxr/).
+
 Most of what I know in JavaScript and CoffeeScript, I know from [Jonathan
 Perret](https://github.com/jonathanperret).  Thank you, Jonathan.
