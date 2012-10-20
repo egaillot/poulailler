@@ -17,12 +17,6 @@
 # along with Poulailler.  If not, see <http://www.gnu.org/licenses/>.
 
 
-POSITIONS = [
-  UserInput.UPPER_LEFT
-  UserInput.UPPER_RIGHT
-  UserInput.LOWER_LEFT
-  UserInput.LOWER_RIGHT ]
-
 class @Bucket
   constructor: (@view)->
     @position = 0
