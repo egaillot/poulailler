@@ -24,7 +24,7 @@ POSITIONS = [
   UserInput.LOWER_RIGHT ]
 
 class @Bucket
-  constructor: (@view, @userInput)->
+  constructor: (@view)->
     @position = 0
     @view.displayBucket @position
 
