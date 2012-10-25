@@ -32,7 +32,7 @@
 }
 
 .sprites > * {
-  _display: none;
+  display: none;
   position: absolute;
 }
 
