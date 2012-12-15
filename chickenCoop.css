@@ -21,14 +21,30 @@
 
 
 .game-wrapper {
+  background: #d9b2b2;
+  width: 310px;
+  height: 295px;
+  padding: 121px 178px 0;
+  margin: 30px auto;
+
+}
+
+.screen {
+  position: relative
+}
+
+.game-infos {
+  position: absolute;
+  top: 10px;
+  left: 220px;
 }
 
 .sprites {
-  position: relative;
+  position: absolute;
   background: #cdd3d5;
   width: 310px;
   height: 220px;
-  margin: 30px auto 0;
+  margin: 0 auto;
 }
 
 .sprites > * {
@@ -217,6 +233,6 @@
 }
 
 .minnie {
-  top: 10px;
+  top: 40px;
   left: 146px;
 }
