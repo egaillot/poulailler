@@ -22,29 +22,24 @@
 
 .game-wrapper {
   background: #d9b2b2;
-  width: 310px;
-  height: 295px;
-  padding: 121px 178px 0;
+  width: 576px;
+  height: 416px;
   margin: 30px auto;
-
 }
 
 .screen {
-  position: relative
+  position: relative;
+  background: #cdd3d5;
+  width: 310px;
+  height: 220px;
+  top: 121px;
+  margin: 0 auto;
 }
 
 .game-infos {
   position: absolute;
   top: 10px;
   left: 220px;
-}
-
-.sprites {
-  position: absolute;
-  background: #cdd3d5;
-  width: 310px;
-  height: 220px;
-  margin: 0 auto;
 }
 
 .sprites > * {
