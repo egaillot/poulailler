@@ -29,7 +29,8 @@
 
 .screen {
   position: relative;
-  background: #cdd3d5;
+  background: url("resources/images/screen.png");
+  box-shadow: inset 0px 0px 7px grey;
   width: 310px;
   height: 220px;
   top: 121px;
@@ -38,8 +39,8 @@
 
 .game-infos {
   position: absolute;
-  top: 10px;
-  left: 220px;
+  top: 23px;
+  left: 160px;
 }
 
 .sprites > * {
@@ -48,173 +49,173 @@
 }
 
 .line-0.egg-0 {
-  top: 30px;
-  left: 30px;
+  top: 67px;
+  left: 33px;
 }
 
 .line-0.egg-1 {
-  top: 40px;
-  left: 50px;
+  top: 75px;
+  left: 43px;
 }
 
 .line-0.egg-2 {
-  top: 50px;
-  left: 70px;
+  top: 83px;
+  left: 54px;
 }
 
 .line-0.egg-3 {
-  top: 60px;
-  left: 90px;
+  top: 91px;
+  left: 64px;
 }
 
 .line-0.egg-4 {
-  top: 70px;
-  left: 110px;
+  top: 99px;
+  left: 74px;
 }
 
 .line-1.egg-0 {
-  top: 30px;
-  left: 270px;
+  top: 70px;
+  left: 275px;
 }
 
 .line-1.egg-1 {
-  top: 40px;
-  left: 250px;
+  top: 77px;
+  left: 264px;
 }
 
 .line-1.egg-2 {
-  top: 50px;
-  left: 230px;
+  top: 84px;
+  left: 252px;
 }
 
 .line-1.egg-3 {
-  top: 60px;
-  left: 210px;
+  top: 92px;
+  left: 241px;
 }
 
 .line-1.egg-4 {
-  top: 70px;
-  left: 190px;
+  top: 100px;
+  left: 230px;
 }
 
 .line-2.egg-0 {
-  top: 90px;
+  top: 119px;
   left: 30px;
 }
 
 .line-2.egg-1 {
-  top: 100px;
-  left: 50px;
+  top: 126px;
+  left: 41px;
 }
 
 .line-2.egg-2 {
-  top: 110px;
-  left: 70px;
+  top: 133px;
+  left: 52px;
 }
 
 .line-2.egg-3 {
-  top: 120px;
-  left: 90px;
+  top: 140px;
+  left: 62px;
 }
 
 .line-2.egg-4 {
-  top: 130px;
-  left: 110px;
+  top: 147px;
+  left: 72px;
 }
 
 .line-3.egg-0 {
-  top: 90px;
-  left: 270px;
+  top: 116px;
+  left: 276px;
 }
 
 .line-3.egg-1 {
-  top: 100px;
-  left: 250px;
+  top: 124px;
+  left: 264px;
 }
 
 .line-3.egg-2 {
-  top: 110px;
-  left: 230px;
+  top: 132px;
+  left: 252px;
 }
 
 .line-3.egg-3 {
-  top: 120px;
-  left: 210px;
+  top: 141px;
+  left: 240px;
 }
 
 .line-3.egg-4 {
-  top: 130px;
-  left: 190px;
+  top: 149px;
+  left: 228px;
 }
 
 .bucket-0 {
-  top: 76px;
-  left: 110px;
+  top: 105px;
+  left: 74px;
 }
 
 .bucket-1 {
-  top: 76px;
-  left: 182px;
+  top: 105px;
+  left: 221px;
 }
 
 .bucket-2 {
-  top: 136px;
-  left: 110px;
+  top: 153px;
+  left: 71px;
 }
 
 .bucket-3 {
-  top: 136px;
-  left: 182px;
+  top: 154px;
+  left: 220px;
 }
 
 #broken-0 {
-  top: 170px;
-  left: 107px;
+  top: 195px;
+  left: 80px;
 }
 
 #broken-1 {
-  top: 155px;
-  left: 105px;
+  top: 172px;
+  left: 65px;
 }
 
 #broken-2 {
-  top: 170px;
-  left: 90px;
+  top: 177px;
+  left: 42px;
 }
 
 #broken-3 {
-  top: 170px;
-  left: 70px;
+  top: 177px;
+  left: 25px;
 }
 
 #broken-4 {
-  top: 170px;
-  left: 50px;
+  top: 177px;
+  left: 8px;
 }
 
 #broken-5 {
-  top: 170px;
-  left: 187px;
+  top: 195px;
+  left: 218px;
 }
 
 #broken-6 {
-  top: 155px;
-  left: 185px;
+  top: 171px;
+  left: 225px;
 }
 
 #broken-7 {
-  top: 170px;
-  left: 210px;
+  top: 175px;
+  left: 254px;
 }
 
 #broken-8 {
-  top: 170px;
-  left: 230px;
+  top: 175px;
+  left: 272px;
 }
 
 #broken-9 {
-  top: 170px;
-  left: 250px;
+  top: 175px;
+  left: 290px;
 }
 
 .game-over {
@@ -228,6 +229,6 @@
 }
 
 .minnie {
-  top: 40px;
-  left: 146px;
+  top: 28px;
+  left: 58px;
 }
