@@ -48,104 +48,130 @@
   position: absolute;
 }
 
+[class^="line-"] {
+  width: 24px;
+  height: 24px;
+  text-indent: -9999em;
+}
+
 .line-0.egg-0 {
-  top: 67px;
-  left: 33px;
+  background: url('resources/images/eggs.png');
+  top: 66px;
+  left: 32px;
 }
 
 .line-0.egg-1 {
-  top: 75px;
-  left: 43px;
+  background: url('resources/images/eggs.png') -24px 0;
+  top: 73px;
+  left: 40px;
 }
 
 .line-0.egg-2 {
-  top: 83px;
-  left: 54px;
+  background: url('resources/images/eggs.png') -48px 0;
+  top: 82px;
+  left: 50px;
 }
 
 .line-0.egg-3 {
-  top: 91px;
-  left: 64px;
+  background: url('resources/images/eggs.png') -72px 0;
+  top: 87px;
+  left: 60px;
 }
 
 .line-0.egg-4 {
-  top: 99px;
-  left: 74px;
+  background: url('resources/images/eggs.png') -96px 0;
+  top: 96px;
+  left: 70px;
 }
 
 .line-1.egg-0 {
-  top: 70px;
-  left: 275px;
+  background: url('resources/images/eggs.png') 0 -24px;
+  top: 69px;
+  left: 274px;
 }
 
 .line-1.egg-1 {
-  top: 77px;
-  left: 264px;
+  background: url('resources/images/eggs.png') -24px -24px;
+  top: 76px;
+  left: 262px;
 }
 
 .line-1.egg-2 {
-  top: 84px;
-  left: 252px;
+  background: url('resources/images/eggs.png') -48px -24px;
+  top: 81px;
+  left: 251px;
 }
 
 .line-1.egg-3 {
-  top: 92px;
-  left: 241px;
+  background: url('resources/images/eggs.png') -72px -24px;
+  top: 89px;
+  left: 240px;
 }
 
 .line-1.egg-4 {
-  top: 100px;
-  left: 230px;
+  background: url('resources/images/eggs.png') -96px -24px;
+  top: 101px;
+  left: 231px;
 }
 
 .line-2.egg-0 {
+  background: url('resources/images/eggs.png') 0 -48px;
   top: 119px;
   left: 30px;
 }
 
 .line-2.egg-1 {
+  background: url('resources/images/eggs.png') -24px -48px;
   top: 126px;
   left: 41px;
 }
 
 .line-2.egg-2 {
-  top: 133px;
-  left: 52px;
+  background: url('resources/images/eggs.png') -48px -48px;
+  top: 132px;
+  left: 50px;
 }
 
 .line-2.egg-3 {
+  background: url('resources/images/eggs.png') -72px -48px;
   top: 140px;
   left: 62px;
 }
 
 .line-2.egg-4 {
-  top: 147px;
-  left: 72px;
+  background: url('resources/images/eggs.png') -96px -48px;
+  top: 144px;
+  left: 71px;
 }
 
 .line-3.egg-0 {
+  background: url('resources/images/eggs.png') 0 -72px;
   top: 116px;
-  left: 276px;
+  left: 273px;
 }
 
 .line-3.egg-1 {
-  top: 124px;
-  left: 264px;
+  background: url('resources/images/eggs.png') -24px -72px;
+  top: 123px;
+  left: 263px;
 }
 
 .line-3.egg-2 {
-  top: 132px;
-  left: 252px;
+  background: url('resources/images/eggs.png') -48px -72px;
+  top: 129px;
+  left: 251px;
 }
 
 .line-3.egg-3 {
-  top: 141px;
+  background: url('resources/images/eggs.png') -72px -72px;
+  top: 138px;
   left: 240px;
 }
 
 .line-3.egg-4 {
-  top: 149px;
-  left: 228px;
+  background: url('resources/images/eggs.png') -96px -72px;
+  top: 148px;
+  left: 230px;
 }
 
 .bucket-0 {
@@ -159,8 +185,8 @@
 
 .bucket-1 {
   background: url("resources/images/bucket-1.png");
-  top: 92px;
-  left: 145px;
+  top: 95px;
+  left: 147px;
   width: 102px;
   height: 103px;
   text-indent: -9999em;
@@ -177,8 +203,8 @@
 
 .bucket-3 {
   background: url("resources/images/bucket-3.png");
-  top: 93px;
-  left: 145px;
+  top: 96px;
+  left: 147px;
   width: 100px;
   height: 102px;
   text-indent: -9999em;
