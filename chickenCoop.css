@@ -271,6 +271,10 @@
 }
 
 .minnie {
-  top: 28px;
-  left: 58px;
+  background: url('resources/images/minnie.png');
+  width: 63px;
+  height: 65px;
+  text-indent: -9999em;
+  top: 9px;
+  left: 40px;
 }
