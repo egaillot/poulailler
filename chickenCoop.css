@@ -20,8 +20,12 @@
  */
 
 
+body {
+  background: #151515;
+}
+
 .game-wrapper {
-  background: #d9b2b2;
+  background: url("resources/images/casing.png");
   width: 576px;
   height: 416px;
   margin: 30px auto;
@@ -31,8 +35,8 @@
   position: relative;
   background: url("resources/images/screen.png");
   box-shadow: inset 0px 0px 7px grey;
-  width: 310px;
-  height: 220px;
+  width: 312px;
+  height: 221px;
   top: 121px;
   margin: 0 auto;
 }
