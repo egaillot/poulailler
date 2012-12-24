@@ -22,6 +22,14 @@
 
 body {
   background: #151515;
+  margin: 0 auto;
+  width: 800px;
+}
+
+footer {
+  margin: 100px;
+  color: white;
+  text-align: center;
 }
 
 .game-wrapper {
