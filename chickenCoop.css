@@ -21,7 +21,7 @@
 
 
 body {
-  background: #151515;
+  background: #151515 url("resources/images/background-pattern.png");
   margin: 0 auto;
   width: 800px;
 }
