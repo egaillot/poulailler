@@ -174,13 +174,16 @@
   left: 230px;
 }
 
+[class$="-sequence"], [class^="bucket-"] {
+  text-indent: -9999em;
+}
+
 .bucket-0 {
   background: url("resources/images/bucket-0.png");
   top: 87px;
   left: 76px;
   width: 101px;
   height: 111px;
-  text-indent: -9999em;
 }
 
 .bucket-1 {
@@ -189,7 +192,6 @@
   left: 147px;
   width: 102px;
   height: 103px;
-  text-indent: -9999em;
 }
 
 .bucket-2 {
@@ -198,7 +200,6 @@
   left: 74px;
   width: 103px;
   height: 108px;
-  text-indent: -9999em;
 }
 
 .bucket-3 {
@@ -207,57 +208,86 @@
   left: 147px;
   width: 100px;
   height: 102px;
-  text-indent: -9999em;
 }
 
 #broken-0 {
-  top: 195px;
-  left: 80px;
+  background: url("resources/images/broken-egg-sequences.png");
+  width: 64px;
+  height: 32px;
+  top: 187px;
+  left: 62px;
 }
 
 #broken-1 {
-  top: 172px;
-  left: 65px;
+  background: url("resources/images/broken-egg-sequences.png") -64px 0;
+  width: 32px;
+  height: 32px;
+  top: 159px;
+  left: 51px;
 }
 
 #broken-2 {
-  top: 177px;
-  left: 42px;
+  background: url("resources/images/broken-egg-sequences.png") -96px 0;
+  width: 32px;
+  height: 32px;
+  top: 172px;
+  left: 41px;
 }
 
 #broken-3 {
-  top: 177px;
-  left: 25px;
+  background: url("resources/images/broken-egg-sequences.png") -128px 0;
+  width: 32px;
+  height: 32px;
+  top: 175px;
+  left: 20px;
 }
 
 #broken-4 {
-  top: 177px;
-  left: 8px;
+  background: url("resources/images/broken-egg-sequences.png") -160px 0;
+  width: 32px;
+  height: 32px;
+  top: 175px;
+  left: 2px;
 }
 
 #broken-5 {
-  top: 195px;
-  left: 218px;
+  background: url("resources/images/broken-egg-sequences.png") 0 -32px;
+  width: 64px;
+  height: 32px;
+  top: 186px;
+  left: 202px;
 }
 
 #broken-6 {
-  top: 171px;
-  left: 225px;
+  background: url("resources/images/broken-egg-sequences.png") -64px -32px;
+  width: 32px;
+  height: 32px;
+  top: 157px;
+  left: 238px;
 }
 
 #broken-7 {
-  top: 175px;
+  background: url("resources/images/broken-egg-sequences.png") -96px -32px;
+  width: 32px;
+  height: 32px;
+  top: 172px;
   left: 254px;
 }
 
 #broken-8 {
-  top: 175px;
+  background: url("resources/images/broken-egg-sequences.png") -128px -32px;
+  width: 32px;
+  height: 32px;
+  top: 170px;
   left: 272px;
 }
 
 #broken-9 {
-  top: 175px;
-  left: 290px;
+  background: url("resources/images/broken-egg-sequences.png") -160px -32px;
+  width: 32px;
+  height: 32px;
+  top: 171px;
+  left: 287px;
 }
 
 .game-over {
