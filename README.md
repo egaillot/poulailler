@@ -48,7 +48,7 @@ how I did it.  In such, this project is meant for educational purpose only.
 
 The program is written in [CoffeeScript](http://coffeescript.org), HTML 
 and CSS. It uses [jQuery](http://jquery.com).  Tests are writen using the 
-[Jasmine framework](http://pivotal.github.com/jasmine).
+[Jasmine framework](https://jasmine.github.io/).
 
 Sounds were created using [as3sfxr](http://www.superflashbros.net/as3sfxr/).
 
